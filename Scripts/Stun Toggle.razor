@@ -1,0 +1,13 @@
+clearsysmsg
+setability 'stun' on
+wait 500
+
+# it toggles even though set to on
+# so check and turn on if turned off
+if insysmsg 'decide to not'
+    setability 'stun' on
+endif
+
+if stam < 15
+    potion 'refresh'
+endif

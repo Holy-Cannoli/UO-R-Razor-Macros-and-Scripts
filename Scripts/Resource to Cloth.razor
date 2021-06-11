@@ -1,0 +1,67 @@
+// Searches for Cotton in backpack
+// Use Spinning Wheel
+
+if findtype '3577' backpack
+    dclicktype '3577' backpack
+    waitfortarget
+    targettype 'spinning wheel' true
+    wait 2000
+    loop
+endif
+
+// Searches for Wool in backpack
+// Use Spinning Wheel
+
+if findtype '3576' backpack
+    dclicktype '3576' backpack
+    waitfortarget
+    targettype 'spinning wheel' true
+    wait 2000
+    loop
+endif
+
+// Searches for Thread in backpack
+// Use Upright Loom
+
+if findtype '4000' backpack
+    dclicktype '4000' backpack
+    waitfortarget
+    targettype 'upright loom' true
+    wait 600
+
+    // If Bolt of Cloth is created wait 800ms
+    // This prevents script from freezing up
+    
+    if insysmsg 'You create some cloth and put it in your backpack'
+        wait 800
+    endif
+    loop
+
+endif
+
+// Searches for Yarn in backpack
+// Use Upright Loom
+
+if findtype '3613' backpack
+    dclicktype '3613' backpack
+    waitfortarget
+    targettype 'upright loom' true
+    wait 600
+
+    // If Bolt of Cloth is created wait 800ms
+    // This prevents script from freezing up
+    
+    if insysmsg 'You create some cloth and put it in your backpack'
+        wait 800
+    endif
+    loop
+
+endif
+
+// Resources are expended
+// Script is complete
+
+overhead 'Resources are all expended' 1266
+overhead 'Script is Complete!' 1266
+
+stop
