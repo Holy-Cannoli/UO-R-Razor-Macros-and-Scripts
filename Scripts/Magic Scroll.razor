@@ -1,0 +1,15 @@
+// Magic Scroll Use Script
+// Replace Flamestrike with any named scroll/spell
+// Be sure to create a counter for the scroll/spell being used
+
+if findtype 'Flamestrike Scroll' backpack
+    if count 'Flamestrike Scroll' < 2
+    overhead 'You have one FS Scroll Remaining!' 1194
+    sysmsg 'You have one FS Scroll Remaining!' 1194
+    endif
+    dclicktype 'Flamestrike Scroll' backpack
+else 
+    overhead 'Out of Flamestrike Scrolls' 1194
+    sysmsg 'Out of Flamestrike Scrolls' 1194
+    cast 'Flamestrike'
+endif
