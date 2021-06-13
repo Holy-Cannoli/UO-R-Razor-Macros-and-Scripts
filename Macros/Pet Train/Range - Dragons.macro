@@ -1,0 +1,23 @@
+!Loop
+Assistant.Macros.ForAction|9
+Assistant.Macros.SpeechAction|0|293|3|ENU|4|33|93|22|128|all kill
+Assistant.Macros.WaitForTargetAction|2
+Assistant.Macros.TargetTypeAction|True|111
+Assistant.Macros.SpeechAction|0|52|3|ENU|4|33|93|22|128|all kill
+Assistant.Macros.WaitForTargetAction|2
+Assistant.Macros.TargetTypeAction|True|111
+Assistant.Macros.SpeechAction|0|52|3|ENU|4|33|93|22|128|all kill
+Assistant.Macros.WaitForTargetAction|2
+Assistant.Macros.TargetTypeAction|True|111
+Assistant.Macros.PauseAction|00:00:02
+Assistant.Macros.HotKeyAction|1332|
+Assistant.Macros.PauseAction|00:00:12
+Assistant.Macros.EndForAction
+Assistant.Macros.ForAction|4
+Assistant.Macros.PauseAction|00:00:01
+Assistant.Macros.SpeechAction|0|52|3|ENC|4|33|111|23|0|All Stay
+Assistant.Macros.SpeechAction|0|52|3|ENC|4|33|111|23|0|All Stay
+Assistant.Macros.SpeechAction|0|52|3|ENC|4|33|111|23|0|All Stay
+Assistant.Macros.SpeechAction|0|52|3|ENC|4|33|111|23|0|All Stay
+Assistant.Macros.PauseAction|00:00:11
+Assistant.Macros.EndForAction

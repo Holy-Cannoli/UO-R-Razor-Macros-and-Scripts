@@ -1,0 +1,15 @@
+!Loop
+// Use Skill Detect Hidden
+Assistant.Macros.UseSkillAction|14
+Assistant.Macros.PauseAction|00:00:00.6000000
+// Target the floor in your house
+Assistant.Macros.AbsoluteTargetAction|0|0|1508559|737|617|44|401
+Assistant.Macros.PauseAction|00:00:00.4000000
+Assistant.Macros.IfAction|4|0|you can see nothing
+Assistant.Macros.SpeechAction|0|188|3|ENU|0|All clear!
+Assistant.Macros.ElseAction
+Assistant.Macros.SpeechAction|0|38|3|ENU|2|16|52|I Ban Thee
+Assistant.Macros.WaitForTargetAction|30
+// Target Nearest Grey Humanoid
+Assistant.Macros.HotKeyAction|1517|
+Assistant.Macros.EndIfAction
