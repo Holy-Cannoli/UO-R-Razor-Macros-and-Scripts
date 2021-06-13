@@ -1,0 +1,45 @@
+!Loop
+Assistant.Macros.IfAction|4|0|oh
+Assistant.Macros.SpeechAction|0|21|3|ENU|0|ARR, GOT ONE ON THE LINE!
+Assistant.Macros.SpeechAction|0|21|3|ENU|0|MONSTER SPOTTED! ALL HANDS: PREPARE TO FIGHT!
+Assistant.Macros.SpeechAction|0|33|3|ENU|5|48|45|6|161|52|drop anchor
+Assistant.Macros.IfAction|4|0|big fish
+Assistant.Macros.SpeechAction|0|41|3|ENU|0|A HUGE CATCH SIR!
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|net
+Assistant.Macros.SpeechAction|0|21|3|ENU|0|FOUND ANOTHER ONE OF THOSE SPECIAL NETS, SIR!
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|parchment
+Assistant.Macros.SpeechAction|0|21|3|ENU|2|17|52|A MAP TO TREASURE, SIR!
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|bottle
+Assistant.Macros.SpeechAction|0|21|3|ENU|0|A MESSAGE HAS BEEN FOUND IN A BOTTLE, SIR!
+Assistant.Macros.EndIfAction
+Assistant.Macros.PauseAction|00:00:01
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|dead
+Assistant.Macros.SpeechAction|0|33|3|ENU|0|ARRRRRRRR
+Assistant.Macros.HotKeyAction|2058|
+Assistant.Macros.GumpResponseAction|1|0|0
+Assistant.Macros.EndIfAction
+Assistant.Macros.DoubleClickTypeAction|3520|True
+Assistant.Macros.WaitForTargetAction|10
+Assistant.Macros.TargetRelLocAction|-3|3
+Assistant.Macros.PauseAction|00:00:02.5000000
+Assistant.Macros.IfAction|4|0|biting
+// Assistant.Macros.SpeechAction|0|33|3|ENU|5|48|45|6|161|52|raise anchor
+// Assistant.Macros.PauseAction|00:00:01
+// Assistant.Macros.SpeechAction|0|52|3|ENU|2|16|90|forward one
+// Assistant.Macros.PauseAction|00:00:01
+// Assistant.Macros.SpeechAction|0|21|3|ENU|5|48|54|4|241|97|stop
+Assistant.Macros.PauseAction|00:00:01
+Assistant.Macros.ElseAction
+Assistant.Macros.PauseAction|00:00:07
+Assistant.Macros.EndIfAction
+Assistant.Macros.DoubleClickTypeAction|3542|True
+Assistant.Macros.PauseAction|00:00:01
+// Assistant.Macros.IfAction|0|0|90
+// Assistant.Macros.MacroCastSpellAction|42
+// Assistant.Macros.WaitForTargetAction|30
+// Assistant.Macros.HotKeyAction|1511|
+// Assistant.Macros.EndIfAction
