@@ -1,0 +1,19 @@
+Assistant.Macros.UseSkillAction|14
+Assistant.Macros.WaitForTargetAction|30
+Assistant.Macros.HotKeyAction|1059|
+Assistant.Macros.PauseAction|00:00:00.2000000
+Assistant.Macros.IfAction|4|0|nothing
+Assistant.Macros.HotKeyAction|1083|
+Assistant.Macros.ElseAction
+Assistant.Macros.SpeechAction|0|52|3|ENG|2|16|52|I ban thee
+Assistant.Macros.WaitForTargetAction|30
+Assistant.Macros.PauseAction|00:00:00.2000000
+Assistant.Macros.HotKeyAction|1517|
+Assistant.Macros.PauseAction|00:00:00.2000000
+Assistant.Macros.HotKeyAction|1195|
+Assistant.Macros.SpeechAction|0|52|3|ENG|2|16|52|I ban thee
+Assistant.Macros.WaitForTargetAction|30
+Assistant.Macros.PauseAction|00:00:00.2000000
+Assistant.Macros.HotKeyAction|1510|
+Assistant.Macros.PauseAction|00:00:00.2000000
+Assistant.Macros.HotKeyAction|1195|

@@ -1,0 +1,30 @@
+!Loop
+Assistant.Macros.IfAction|100|1|100|7
+Assistant.Macros.HotKeyAction|1083|
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|you do not have enough room for the item in your backpack!
+Assistant.Macros.LiftTypeAction|5139|1
+Assistant.Macros.DropAction|0x4729D5DC|(117, 37, 0)|0
+Assistant.Macros.PauseAction|00:00:02
+Assistant.Macros.HotKeyAction|0|Play: Blacksmith\BSM - Smelt Platemail Gorget
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|that container cannot hold more weight.
+Assistant.Macros.LiftTypeAction|5139|1
+Assistant.Macros.DropAction|0x4729D5DC|(90, 50, 0)|0
+Assistant.Macros.PauseAction|00:00:02
+Assistant.Macros.HotKeyAction|0|Play: Blacksmith\BSM - Smelt Platemail Gorget
+Assistant.Macros.EndIfAction
+Assistant.Macros.HotKeyAction|0|Restock Agent-09
+Assistant.Macros.AbsoluteTargetAction|0|0|1193924060|1792|2937|-249|3647
+Assistant.Macros.PauseAction|00:00:02
+Assistant.Macros.DoubleClickTypeAction|4027|True
+Assistant.Macros.WaitForGumpAction|949095101|False|1
+Assistant.Macros.PauseAction|00:00:00.1000000
+Assistant.Macros.GumpResponseAction|15|0|0
+Assistant.Macros.WaitForGumpAction|949095101|False|1
+Assistant.Macros.PauseAction|00:00:00.1000000
+Assistant.Macros.GumpResponseAction|16|0|0
+Assistant.Macros.WaitForGumpAction|949095101|False|1
+Assistant.Macros.PauseAction|00:00:00.1000000
+Assistant.Macros.GumpResponseAction|0|0|0
+Assistant.Macros.PauseAction|00:00:00.1000000

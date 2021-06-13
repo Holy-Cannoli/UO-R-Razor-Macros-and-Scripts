@@ -1,0 +1,13 @@
+!Loop
+Assistant.Macros.IfAction|4|0|no item of type platemail gorget (1413) found!
+Assistant.Macros.HotKeyAction|0|Play: Blacksmith\BSM - Platemail Gorget
+Assistant.Macros.EndIfAction
+Assistant.Macros.DoubleClickTypeAction|4027|True
+Assistant.Macros.PauseAction|00:00:00.2000000
+Assistant.Macros.GumpResponseAction|14|0|0
+Assistant.Macros.WaitForTargetAction|1
+Assistant.Macros.PauseAction|00:00:00.2500000
+Assistant.Macros.TargetTypeAction|False|5139
+Assistant.Macros.WaitForGumpAction|949095101|False|1
+Assistant.Macros.GumpResponseAction|0|0|0
+Assistant.Macros.PauseAction|00:00:00.2500000

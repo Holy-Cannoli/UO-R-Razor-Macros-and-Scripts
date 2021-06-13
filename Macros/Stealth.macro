@@ -1,0 +1,18 @@
+!Loop
+Assistant.Macros.IfAction|100|1|80|47
+Assistant.Macros.HotKeyAction|0|Play: Stealth Gear Swap
+Assistant.Macros.EndIfAction
+Assistant.Macros.UseSkillAction|47
+Assistant.Macros.PauseAction|00:00:10.5000000
+Assistant.Macros.IfAction|4|0|to move unnoticed.
+Assistant.Macros.UseSkillAction|21
+Assistant.Macros.PauseAction|00:00:10.5000000
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|you must hide first
+Assistant.Macros.UseSkillAction|21
+Assistant.Macros.PauseAction|00:00:10.5000000
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|revealed!
+Assistant.Macros.UseSkillAction|21
+Assistant.Macros.PauseAction|00:00:10.5000000
+Assistant.Macros.EndIfAction

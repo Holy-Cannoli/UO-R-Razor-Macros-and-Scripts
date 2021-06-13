@@ -1,0 +1,23 @@
+!Loop
+Assistant.Macros.IfAction|100|1|62.8|25
+Assistant.Macros.HotKeyAction|0|Play: Magery\Magery - Ebolt
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|50|2|20|Mandrake Root
+Assistant.Macros.HotKeyAction|0|Restock Agent-01
+Assistant.Macros.AbsoluteTargetAction|0|0|1201295936|1111|2807|18|3647
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|50|2|20|Sulfurous Ash
+Assistant.Macros.HotKeyAction|0|Restock Agent-02
+Assistant.Macros.AbsoluteTargetAction|0|0|1201295936|1111|2807|18|3647
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|1|0|10
+Assistant.Macros.UseSkillAction|46
+Assistant.Macros.PauseAction|00:00:01
+Assistant.Macros.IfAction|4|0|you enter a meditative trance.
+Assistant.Macros.WaitForStatAction|1|1|90|3600
+Assistant.Macros.EndIfAction
+Assistant.Macros.ElseAction
+Assistant.Macros.MacroCastSpellAction|30
+Assistant.Macros.WaitForTargetAction|30
+Assistant.Macros.AbsoluteTargetAction|0|1|1078009112|105|108|0|3834
+Assistant.Macros.PauseAction|00:00:01.2500000

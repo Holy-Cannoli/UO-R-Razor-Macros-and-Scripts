@@ -1,0 +1,12 @@
+!Loop
+Assistant.Macros.UseSkillAction|23
+Assistant.Macros.PauseAction|00:00:00.3000000
+Assistant.Macros.TargetTypeAction|False|4079
+Assistant.Macros.PauseAction|00:00:00.3000000
+Assistant.Macros.TargetTypeAction|False|4082
+Assistant.Macros.PauseAction|00:00:09.4000000
+Assistant.Macros.IfAction|100|1|50|23
+Assistant.Macros.HotKeyAction|0|Organizer Agent-01
+Assistant.Macros.PauseAction|00:00:00.7000000
+Assistant.Macros.HotKeyAction|0|Play: Inscription\1-100 Inscription RZ
+Assistant.Macros.EndIfAction

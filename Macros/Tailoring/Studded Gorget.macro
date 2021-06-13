@@ -1,0 +1,22 @@
+!Loop
+Assistant.Macros.IfAction|100|1|100|34
+Assistant.Macros.HotKeyAction|1083|
+Assistant.Macros.EndIfAction
+Assistant.Macros.HotKeyAction|0|Restock Agent-07
+Assistant.Macros.PauseAction|00:00:00.2500000
+Assistant.Macros.AbsoluteTargetAction|0|0|1201296039|1791|2938|-249|3646
+Assistant.Macros.PauseAction|00:00:00.5000000
+Assistant.Macros.DoubleClickTypeAction|3997|True
+Assistant.Macros.PauseAction|00:00:00.4000000
+Assistant.Macros.GumpResponseAction|43|0|0
+Assistant.Macros.PauseAction|00:00:00.4000000
+Assistant.Macros.GumpResponseAction|2|0|0
+Assistant.Macros.PauseAction|00:00:05
+Assistant.Macros.DoubleClickTypeAction|3999|True
+Assistant.Macros.PauseAction|00:00:00.5000000
+Assistant.Macros.TargetTypeAction|False|5078
+Assistant.Macros.PauseAction|00:00:00.7500000
+Assistant.Macros.DoubleClickTypeAction|3999|True
+Assistant.Macros.PauseAction|00:00:00.5000000
+Assistant.Macros.TargetTypeAction|False|5078
+Assistant.Macros.PauseAction|00:00:00.2500000

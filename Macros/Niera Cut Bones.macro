@@ -1,0 +1,13 @@
+!Loop
+Assistant.Macros.ForAction|4
+Assistant.Macros.DoubleClickTypeAction|3922|True
+Assistant.Macros.PauseAction|00:00:00.5000000
+Assistant.Macros.TargetTypeAction|False|6928
+Assistant.Macros.DoubleClickTypeAction|3922|True
+Assistant.Macros.PauseAction|00:00:00.5000000
+Assistant.Macros.TargetTypeAction|False|3966
+Assistant.Macros.EndForAction
+Assistant.Macros.SpeechAction|0|43|3|ENU|4|33|93|22|128|all kill
+Assistant.Macros.PauseAction|00:00:00.3500000
+Assistant.Macros.HotKeyAction|1510|
+Assistant.Macros.PauseAction|00:00:00.1500000

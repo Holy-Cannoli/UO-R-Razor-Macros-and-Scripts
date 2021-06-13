@@ -1,0 +1,22 @@
+!Loop
+Assistant.Macros.IfAction|100|1|95|24
+Assistant.Macros.HotKeyAction|0|Play: ID
+Assistant.Macros.EndIfAction
+Assistant.Macros.UseSkillAction|3
+Assistant.Macros.WaitForTargetAction|1
+Assistant.Macros.AbsoluteTargetAction|0|0|1136545310|69|110|0|3713
+Assistant.Macros.PauseAction|00:00:01
+Assistant.Macros.DoubleClickTypeAction|5372|True
+Assistant.Macros.PauseAction|00:00:01
+Assistant.Macros.AbsoluteTargetAction|0|0|1108752566|124|66|0|2474
+Assistant.Macros.PauseAction|00:00:04
+Assistant.Macros.IfAction|4|0|the lock quickly yields to your skill
+Assistant.Macros.DoubleClickAction|1108752567|4110
+Assistant.Macros.PauseAction|00:00:01
+Assistant.Macros.AbsoluteTargetAction|0|0|1108752566|124|66|0|2474
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|appear
+Assistant.Macros.DoubleClickAction|1108752567|4110
+Assistant.Macros.PauseAction|00:00:01
+Assistant.Macros.AbsoluteTargetAction|0|0|1108752566|124|66|0|2474
+Assistant.Macros.EndIfAction

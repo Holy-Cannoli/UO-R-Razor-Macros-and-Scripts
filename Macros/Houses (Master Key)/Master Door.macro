@@ -1,0 +1,34 @@
+Assistant.Macros.SpeechAction|0|68|3|ENU|0|[where
+Assistant.Macros.PauseAction|00:00:00.4000000
+Assistant.Macros.IfAction|4|0|1738 29
+Assistant.Macros.HotKeyAction|0|Play: Houses\bunting
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|3994 250
+Assistant.Macros.HotKeyAction|0|Play: Houses\Castle
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|1111 2801
+Assistant.Macros.HotKeyAction|0|Play: Houses\HWC - KP
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|1115 2819
+Assistant.Macros.HotKeyAction|0|Play: Houses\HWC - FDoor
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|1789 2883
+Assistant.Macros.HotKeyAction|0|Play: Houses\WHill - FDoor
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|1789 2879
+Assistant.Macros.HotKeyAction|0|Play: Houses\WHill - TDoor
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|1475 817
+Assistant.Macros.HotKeyAction|0|Play: Houses\Chaos Lib
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|1936 2345
+Assistant.Macros.HotKeyAction|0|Play: Houses\Trin Keep Front
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|1932 2327
+Assistant.Macros.HotKeyAction|0|Play: Houses\Trin Keep CY
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|737 626
+Assistant.Macros.HotKeyAction|0|Play: Houses\Dark Castle
+Assistant.Macros.EndIfAction
+Assistant.Macros.ElseAction
+Assistant.Macros.UseSkillAction|21

@@ -1,0 +1,22 @@
+!Loop
+Assistant.Macros.HotKeyAction|1332|
+Assistant.Macros.HotKeyAction|1195|
+Assistant.Macros.SpeechAction|0|52|3|ENU|2|16|52|I Ban Thee
+Assistant.Macros.WaitForTargetAction|1
+Assistant.Macros.HotKeyAction|1511|
+Assistant.Macros.HotKeyAction|1332|
+Assistant.Macros.HotKeyAction|1195|
+Assistant.Macros.HotKeyAction|1044095|
+Assistant.Macros.WaitForTargetAction|1
+Assistant.Macros.TargetTypeAction|True|233
+Assistant.Macros.HotKeyAction|1332|
+Assistant.Macros.HotKeyAction|1195|
+Assistant.Macros.HotKeyAction|1395|
+Assistant.Macros.HotKeyAction|1044095|
+Assistant.Macros.WaitForTargetAction|1
+Assistant.Macros.TargetTypeAction|True|232
+Assistant.Macros.HotKeyAction|1332|
+Assistant.Macros.HotKeyAction|1195|
+Assistant.Macros.HotKeyAction|1044095|
+Assistant.Macros.WaitForTargetAction|1
+Assistant.Macros.TargetTypeAction|True|233

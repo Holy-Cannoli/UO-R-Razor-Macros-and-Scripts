@@ -1,0 +1,59 @@
+!Loop
+// Restock / Regen
+Assistant.Macros.IfAction|50|2|5|Blood Moss
+Assistant.Macros.HotKeyAction|0|Restock Agent-08
+Assistant.Macros.AbsoluteTargetAction|0|0|1077159580|3352|214|-244|2474
+Assistant.Macros.PauseAction|00:00:01.9000000
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|50|2|5|Black Pearl
+Assistant.Macros.HotKeyAction|0|Restock Agent-08
+Assistant.Macros.AbsoluteTargetAction|0|0|1077159580|3352|214|-244|2474
+Assistant.Macros.PauseAction|00:00:01.9000000
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|50|2|5|Mandrake Root
+Assistant.Macros.HotKeyAction|0|Restock Agent-08
+Assistant.Macros.AbsoluteTargetAction|0|0|1077159580|3352|214|-244|2474
+Assistant.Macros.PauseAction|00:00:01.9000000
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|50|2|5|Nightshade
+Assistant.Macros.HotKeyAction|0|Restock Agent-08
+Assistant.Macros.PauseAction|00:00:01.9000000
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|50|2|2|Scribe Pen's
+Assistant.Macros.HotKeyAction|0|Restock Agent-03
+Assistant.Macros.AbsoluteTargetAction|0|0|1077159580|3352|214|-244|2474
+Assistant.Macros.PauseAction|00:00:05.5000000
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|50|2|5|Blank Scrolls
+Assistant.Macros.HotKeyAction|0|Restock Agent-04
+Assistant.Macros.AbsoluteTargetAction|0|0|1077159580|3352|214|-244|2474
+Assistant.Macros.PauseAction|00:00:00.5000000
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|1|0|50
+Assistant.Macros.HotKeyAction|1044106|
+Assistant.Macros.PauseAction|00:00:00.2000000
+Assistant.Macros.IfAction|4|0|you cannot focus your concentration
+Assistant.Macros.PauseAction|00:00:10
+Assistant.Macros.HotKeyAction|1044106|
+Assistant.Macros.EndIfAction
+Assistant.Macros.WaitForStatAction|1|1|90|3600
+Assistant.Macros.EndIfAction
+// Craft
+Assistant.Macros.DoubleClickTypeAction|4031|True
+Assistant.Macros.PauseAction|00:00:00.3000000
+Assistant.Macros.GumpResponseAction|50|0|0
+Assistant.Macros.PauseAction|00:00:00.3000000
+Assistant.Macros.GumpResponseAction|9|0|0
+Assistant.Macros.PauseAction|00:00:04.8000000
+Assistant.Macros.WhileAction|5|1|290
+Assistant.Macros.HotKeyAction|0|Organizer Agent-02
+Assistant.Macros.PauseAction|00:00:00.5000000
+Assistant.Macros.EndWhileAction
+// Switch Craft
+Assistant.Macros.IfAction|100|1|100|23
+Assistant.Macros.HotKeyAction|0|Organizer Agent-02
+Assistant.Macros.PauseAction|00:00:00.5000000
+Assistant.Macros.HotKeyAction|0|Organizer Agent-01
+Assistant.Macros.PauseAction|00:00:08
+Assistant.Macros.HotKeyAction|1083|
+Assistant.Macros.EndIfAction

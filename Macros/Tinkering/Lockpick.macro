@@ -1,0 +1,14 @@
+!Loop
+Assistant.Macros.IfAction|100|1|94|37
+Assistant.Macros.HotKeyAction|0|Play: Tinkering\Heating Stands
+Assistant.Macros.EndIfAction
+Assistant.Macros.HotKeyAction|0|Restock Agent-08
+Assistant.Macros.PauseAction|00:00:00.2500000
+Assistant.Macros.AbsoluteTargetAction|0|0|1195364432|1792|2937|-249|3647
+Assistant.Macros.PauseAction|00:00:01
+Assistant.Macros.DoubleClickTypeAction|7868|True
+Assistant.Macros.PauseAction|00:00:00.5000000
+Assistant.Macros.GumpResponseAction|21|0|0
+Assistant.Macros.PauseAction|00:00:00.4000000
+Assistant.Macros.HotKeyAction|0|Organizer Agent-04
+Assistant.Macros.PauseAction|00:00:00.6000000

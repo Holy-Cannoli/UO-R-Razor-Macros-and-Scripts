@@ -1,0 +1,17 @@
+!Loop
+Assistant.Macros.IfAction|4|0|no one
+Assistant.Macros.HotKeyAction|1477|
+Assistant.Macros.HotKeyAction|1477|
+Assistant.Macros.SpeechAction|0|52|3|ENU|5|48|232|22|49|108|all follow me
+Assistant.Macros.HotKeyAction|1477|
+Assistant.Macros.HotKeyAction|1477|
+Assistant.Macros.EndIfAction
+Assistant.Macros.SpeechAction|0|52|3|ENU|4|33|93|22|128|all kill
+Assistant.Macros.HotKeyAction|1511|
+Assistant.Macros.UseSkillAction|22
+Assistant.Macros.HotKeyAction|1062|
+Assistant.Macros.PauseAction|00:00:00.1000000
+Assistant.Macros.HotKeyAction|1062|
+Assistant.Macros.PauseAction|00:00:00.1000000
+Assistant.Macros.HotKeyAction|1477|
+Assistant.Macros.HotKeyAction|1477|

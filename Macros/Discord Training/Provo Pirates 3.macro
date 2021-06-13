@@ -1,0 +1,16 @@
+!Loop
+Assistant.Macros.DoubleClickTypeAction|3741|True
+Assistant.Macros.PauseAction|00:00:02
+Assistant.Macros.UseSkillAction|22
+Assistant.Macros.PauseAction|00:00:00.6000000
+Assistant.Macros.AbsoluteTargetAction|0|1|1875511|1730|3520|7|400
+Assistant.Macros.PauseAction|00:00:00.5000000
+Assistant.Macros.AbsoluteTargetAction|0|1|1875410|1734|3520|7|401
+Assistant.Macros.PauseAction|00:00:02
+Assistant.Macros.IfAction|4|0|succeeds
+Assistant.Macros.PauseAction|00:00:08
+Assistant.Macros.HotKeyAction|0|Play: Discord\Provo Pirates 1
+Assistant.Macros.ElseAction
+Assistant.Macros.PauseAction|00:00:08
+Assistant.Macros.HotKeyAction|0|Play: Discord\Provo Pirates 3
+Assistant.Macros.EndIfAction

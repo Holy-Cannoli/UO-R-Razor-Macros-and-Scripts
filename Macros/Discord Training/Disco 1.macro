@@ -1,0 +1,14 @@
+!Loop
+Assistant.Macros.DoubleClickTypeAction|3741|True
+Assistant.Macros.PauseAction|00:00:02
+Assistant.Macros.UseSkillAction|15
+Assistant.Macros.PauseAction|00:00:00.6000000
+Assistant.Macros.AbsoluteTargetAction|0|0|1875952|1730|3518|7|401
+Assistant.Macros.PauseAction|00:00:02
+Assistant.Macros.IfAction|4|0|jarring music
+Assistant.Macros.PauseAction|00:00:08
+Assistant.Macros.HotKeyAction|0|Play: Discord\Disco 2
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|4|0|already in discord
+Assistant.Macros.HotKeyAction|0|Play: Discord\Hiding
+Assistant.Macros.EndIfAction

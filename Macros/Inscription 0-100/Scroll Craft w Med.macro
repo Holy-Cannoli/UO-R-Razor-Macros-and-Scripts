@@ -1,0 +1,12 @@
+!Loop
+Assistant.Macros.IfAction|1|0|40
+Assistant.Macros.UseSkillAction|46
+Assistant.Macros.PauseAction|00:00:01
+Assistant.Macros.IfAction|4|0|you enter a meditative trance.
+Assistant.Macros.WaitForStatAction|1|1|95|3600
+Assistant.Macros.EndIfAction
+Assistant.Macros.ElseAction
+Assistant.Macros.DoubleClickTypeAction|4031|True
+Assistant.Macros.PauseAction|00:00:00.5000000
+Assistant.Macros.GumpResponseAction|21|0|0
+Assistant.Macros.PauseAction|00:00:03.5000000

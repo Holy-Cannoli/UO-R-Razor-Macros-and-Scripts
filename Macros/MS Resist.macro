@@ -1,0 +1,40 @@
+!Loop
+Assistant.Macros.ForAction|8
+Assistant.Macros.IfAction|50|0|20|Blood Moss
+Assistant.Macros.HotKeyAction|0|Restock Agent-02
+Assistant.Macros.PauseAction|00:00:00.3000000
+Assistant.Macros.AbsoluteTargetAction|0|0|1088591265|2045|2309|32|3648
+Assistant.Macros.PauseAction|00:00:01.9000000
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|50|0|20|Spider's Silk
+Assistant.Macros.HotKeyAction|0|Restock Agent-02
+Assistant.Macros.PauseAction|00:00:00.3000000
+Assistant.Macros.AbsoluteTargetAction|0|0|1088591265|2045|2309|32|3648
+Assistant.Macros.PauseAction|00:00:01.9000000
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|50|0|19|Mandrake Root
+Assistant.Macros.HotKeyAction|0|Restock Agent-02
+Assistant.Macros.PauseAction|00:00:00.3000000
+Assistant.Macros.AbsoluteTargetAction|0|0|1088591265|2045|2309|32|3648
+Assistant.Macros.PauseAction|00:00:02
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|50|0|20|Sulfurous Ash
+Assistant.Macros.HotKeyAction|0|Restock Agent-02
+Assistant.Macros.PauseAction|00:00:00.3000000
+Assistant.Macros.AbsoluteTargetAction|0|0|1088591265|2045|2309|32|3648
+Assistant.Macros.PauseAction|00:00:01.9000000
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|1|1|70
+Assistant.Macros.PauseAction|00:00:00.5000000
+Assistant.Macros.MacroCastSpellAction|55
+Assistant.Macros.PauseAction|00:00:02.5000000
+Assistant.Macros.AbsoluteTargetAction|0|0|1188628875|2048|2306|26|5062
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|1|0|69
+Assistant.Macros.HotKeyAction|1044106|
+Assistant.Macros.PauseAction|00:00:10.5000000
+Assistant.Macros.EndIfAction
+Assistant.Macros.DoubleClickTypeAction|2427|True
+Assistant.Macros.EndForAction
+Assistant.Macros.SpeechAction|0|73|3|ENU|4|33|111|23|0|all stay
+Assistant.Macros.SpeechAction|0|43|3|ENU|4|33|111|23|0|all stay

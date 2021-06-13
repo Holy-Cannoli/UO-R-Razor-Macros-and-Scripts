@@ -1,0 +1,10 @@
+!Loop
+Assistant.Macros.IfAction|4|0|you do not have enough room for the item in your backpack!
+Assistant.Macros.LiftTypeAction|5121|1
+Assistant.Macros.DropAction|0x4729D5DC|(-1, -1, 0)|0
+Assistant.Macros.PauseAction|00:00:02
+Assistant.Macros.EndIfAction
+Assistant.Macros.DoubleClickTypeAction|4027|True
+Assistant.Macros.WaitForGumpAction|949095101|False|1
+Assistant.Macros.GumpResponseAction|21|0|0
+Assistant.Macros.WaitForGumpAction|949095101|False|1

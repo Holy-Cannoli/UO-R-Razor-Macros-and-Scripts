@@ -1,0 +1,13 @@
+Assistant.Macros.DoubleClickAction|1234771010|5995
+Assistant.Macros.WaitForTargetAction|1
+Assistant.Macros.AbsoluteTargetAction|0|0|1255360509|1475|816|6|1653
+Assistant.Macros.PauseAction|00:00:00.5000000
+Assistant.Macros.DoubleClickAction|1255360509|1653
+Assistant.Macros.PauseAction|00:00:01.2000000
+Assistant.Macros.DoubleClickAction|1255360509|1653
+Assistant.Macros.PauseAction|00:00:00.4000000
+Assistant.Macros.DoubleClickAction|1234771010|5995
+Assistant.Macros.WaitForTargetAction|1
+Assistant.Macros.AbsoluteTargetAction|0|0|1255360509|0|0|0|1653
+Assistant.Macros.PauseAction|00:00:00.5000000
+Assistant.Macros.HotKeyAction|0|Play: Houses\Detect

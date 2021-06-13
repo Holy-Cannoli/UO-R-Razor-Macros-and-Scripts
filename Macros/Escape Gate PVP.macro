@@ -1,0 +1,5 @@
+Assistant.Macros.DoubleClickTypeAction|8032|True
+Assistant.Macros.WaitForTargetAction|30
+Assistant.Macros.AbsoluteTargetAction|0|0|1247525503|104|143|0|7956
+Assistant.Macros.PauseAction|00:00:00.2500000
+Assistant.Macros.HotKeyAction|0|Play Script: Gate Click

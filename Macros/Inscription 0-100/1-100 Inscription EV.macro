@@ -1,0 +1,17 @@
+Assistant.Macros.HotKeyAction|0|Organizer Agent-01
+Assistant.Macros.PauseAction|00:00:06
+Assistant.Macros.IfAction|100|2|50|23
+Assistant.Macros.HotKeyAction|0|Restock Agent-01
+Assistant.Macros.AbsoluteTargetAction|0|0|1077159580|3352|214|-244|2474
+Assistant.Macros.PauseAction|00:00:00.7000000
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|100|2|55.2|23
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|100|2|86.1|23
+Assistant.Macros.HotKeyAction|0|Play: Inscription\Crafts\Energy Bolt
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|100|2|91.1|23
+Assistant.Macros.EndIfAction
+Assistant.Macros.IfAction|100|2|100|23
+Assistant.Macros.HotKeyAction|0|Play: Inscription\Crafts\Energy Vortex
+Assistant.Macros.EndIfAction

@@ -1,0 +1,9 @@
+!Loop
+Assistant.Macros.SpeechAction|0|101|3|ENU|2|17|113|Hyman buy
+Assistant.Macros.PauseAction|00:00:02
+Assistant.Macros.SpeechAction|0|101|3|ENU|2|17|113|Kiernan buy
+Assistant.Macros.PauseAction|00:00:02
+Assistant.Macros.SpeechAction|0|101|3|ENU|2|17|113|Johann buy
+Assistant.Macros.PauseAction|00:00:02
+Assistant.Macros.HotKeyAction|0|Organizer Agent-01
+Assistant.Macros.PauseAction|00:00:30

@@ -1,0 +1,15 @@
+!Loop
+Assistant.Macros.SpeechAction|0|690|3|ENU|5|48|7|22|177|153|all stay
+Assistant.Macros.SpeechAction|0|690|3|ENU|5|48|7|22|177|153|all stay
+Assistant.Macros.SpeechAction|0|690|3|ENU|5|48|7|22|177|153|all stay
+Assistant.Macros.PauseAction|00:01:35
+Assistant.Macros.SpeechAction|0|690|3|ENU|4|33|93|22|128|all kill
+Assistant.Macros.PauseAction|00:00:00.6500000
+Assistant.Macros.AbsoluteTargetAction|0|1|241920|2187|1148|-4|111
+Assistant.Macros.SpeechAction|0|690|3|ENU|4|33|93|22|128|all kill
+Assistant.Macros.PauseAction|00:00:00.6500000
+Assistant.Macros.AbsoluteTargetAction|0|1|241920|2187|1148|-4|111
+Assistant.Macros.SpeechAction|0|690|3|ENU|4|33|93|22|128|all kill
+Assistant.Macros.PauseAction|00:00:00.6500000
+Assistant.Macros.AbsoluteTargetAction|0|1|241920|2187|1148|-4|111
+Assistant.Macros.PauseAction|00:00:55
