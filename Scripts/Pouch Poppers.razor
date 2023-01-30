@@ -1,0 +1,482 @@
+// All in one hotkey
+// Use dem poppers
+// Instructions: Create counter for pouches in
+// Razor named Pouch
+// Script will recognize up to 8 pouches in bag
+// More than 8 and script will not work
+
+useonce
+
+wait 400
+
+// If poppers not loaded in list/untrapped
+
+if count 'Pouch' = 0
+    overhead 'You have no pouches!!!' 56
+    stop
+
+elseif count 'Pouch' = 1
+    if insysmsg 'the useonce queue is empty'
+        overhead 'Select 1 pouch' 182
+        setvar 'pouch1'
+
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch1'
+    
+        wait 400
+    
+        // Add poppers to list
+        useonce 'add'
+        waitfortarget 
+        target 'pouch1'
+    endif
+
+elseif count 'Pouch' = 2 
+    if insysmsg 'the useonce queue is empty'
+        overhead 'Select 2 pouches' 182
+        setvar 'pouch1'
+        setvar 'pouch2'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch1'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch2'
+    
+        wait 400
+    
+        // Add poppers to list
+        useonce 'add'
+        waitfortarget 
+        target 'pouch1'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch2'
+    endif
+
+elseif count 'Pouch' = 3 
+    if insysmsg 'the useonce queue is empty'
+        overhead 'Select 3 pouches' 182
+        setvar 'pouch1'
+        setvar 'pouch2'
+        setvar 'pouch3'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch1'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch2'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch3'
+    
+        wait 400
+    
+        // Add poppers to list
+        useonce 'add'
+        waitfortarget 
+        target 'pouch1'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch2'
+
+        useonce 'add'
+        waitfortarget 
+        target 'pouch3'        
+    endif
+
+elseif count 'Pouch' = 4
+    if insysmsg 'the useonce queue is empty'
+        overhead 'Select 4 pouches' 182
+        setvar 'pouch1'
+        setvar 'pouch2'
+        setvar 'pouch3'
+        setvar 'pouch4'        
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch1'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch2'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch3'
+
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch4'
+        
+        wait 400
+    
+        // Add poppers to list
+        useonce 'add'
+        waitfortarget 
+        target 'pouch1'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch2'
+
+        useonce 'add'
+        waitfortarget 
+        target 'pouch3'  
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch4'
+    endif
+
+elseif count 'Pouch' = 5
+    if insysmsg 'the useonce queue is empty'
+        overhead 'Select 5 pouches' 182
+        setvar 'pouch1'
+        setvar 'pouch2'
+        setvar 'pouch3'
+        setvar 'pouch4'        
+        setvar 'pouch5'        
+       
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch1'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch2'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch3'
+
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch4'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch5'
+        
+        wait 400
+    
+        // Add poppers to list
+        useonce 'add'
+        waitfortarget 
+        target 'pouch1'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch2'
+
+        useonce 'add'
+        waitfortarget 
+        target 'pouch3'  
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch4'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch5'
+    endif
+
+elseif count 'Pouch' = 6
+    if insysmsg 'the useonce queue is empty'
+        overhead 'Select 6 pouches' 182
+        setvar 'pouch1'
+        setvar 'pouch2'
+        setvar 'pouch3'
+        setvar 'pouch4'        
+        setvar 'pouch5'        
+        setvar 'pouch6'         
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch1'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch2'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch3'
+
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch4'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch5'
+        
+        wait 1250
+        
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch6'
+        
+        wait 400
+    
+        // Add poppers to list
+        useonce 'add'
+        waitfortarget 
+        target 'pouch1'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch2'
+
+        useonce 'add'
+        waitfortarget 
+        target 'pouch3'  
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch4'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch5'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch6'
+    endif
+
+elseif count 'Pouch' = 7
+    if insysmsg 'the useonce queue is empty'
+        overhead 'Select 7 pouches' 182
+        setvar 'pouch1'
+        setvar 'pouch2'
+        setvar 'pouch3'
+        setvar 'pouch4'        
+        setvar 'pouch5'        
+        setvar 'pouch6'         
+        setvar 'pouch7' 
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch1'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch2'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch3'
+
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch4'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch5'
+        
+        wait 1250
+        
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch6'
+        
+        wait 1250
+        
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch7'
+        
+        wait 400
+    
+        // Add poppers to list
+        useonce 'add'
+        waitfortarget 
+        target 'pouch1'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch2'
+
+        useonce 'add'
+        waitfortarget 
+        target 'pouch3'  
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch4'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch5'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch6'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch7'
+    endif
+
+elseif count 'Pouch' = 8
+    if insysmsg 'the useonce queue is empty'
+        overhead 'Select 8 pouches' 182
+        setvar 'pouch1'
+        setvar 'pouch2'
+        setvar 'pouch3'
+        setvar 'pouch4'        
+        setvar 'pouch5'        
+        setvar 'pouch6'         
+        setvar 'pouch7' 
+        setvar 'pouch8' 
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch1'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch2'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch3'
+
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch4'
+        
+        wait 1250
+    
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch5'
+        
+        wait 1250
+        
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch6'
+        
+        wait 1250
+        
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch7'
+        
+        wait 1250
+        
+        cast 'magic trap'
+        waitfortarget 
+        target 'pouch8'
+        
+        wait 400
+    
+        // Add poppers to list
+        useonce 'add'
+        waitfortarget 
+        target 'pouch1'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch2'
+
+        useonce 'add'
+        waitfortarget 
+        target 'pouch3'  
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch4'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch5'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch6'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch7'
+        
+        useonce 'add'
+        waitfortarget 
+        target 'pouch8'
+    endif
+
+else
+    overhead 'Too many pouches in bag' 56
+    overhead 'Script works up to 8 pouches' 56
+    stop
+endif
