@@ -1,0 +1,79 @@
+// Lumberjacking Training Script
+// Chops trees, transfers logs to pack llama, moves to next tree when empty
+
+// Set your max weight
+@setvar! globalWeight 390
+
+// Do you want an overhead message for trees that do not have any wood?
+// 1 = yes and 0 = no
+@setvar! promptNoWood 1
+
+// Do you have a walk macro? 1 = yes and 0 = no
+@setvar! autoWalk 0
+
+// Attempting to find hatchet in backpack
+if not findtype '3907' backpack
+    overhead 'No axe found in backpack!' 33
+    stop
+endif
+
+// Check if we are on a mount
+if mounted
+    overhead 'You need to dismount first!' 45
+    stop
+endif
+
+if not varexist 'packy'
+    overhead 'Select your Pack Llama or Horse' 38
+    setvar! 'packy'
+endif
+
+while not dead
+
+    for 30
+    
+        // Equip axe if not already equipped
+        if lhandempty
+            lifttype '3907' 
+            drop 'self' LeftHand
+            wait 500
+        endif
+
+        hotkey 'Use item in hand'
+        wft
+        targetrelloc -1 0
+    
+        // Check for system messages indicating no wood
+        if autoWalk = 1
+            if insysmsg 'not enough wood' or insysmsg 'use an axe on that' and promptNoWood = 1
+                overhead 'Move to next tree' 45
+                hotkey 'Play: Walking'
+            endif
+        endif
+    
+        wait 1000
+    
+        // Check weight to avoid overloading
+        if weight > globalWeight
+            overhead 'Transfering logs to packy' 45
+            while findtype '7133' backpack
+                hotkey 'Use item in hand'
+                waitfortarget
+                targettype '7133'
+                wait 1800
+            endwhile
+        endif
+    
+        // Transfer boards to pack llama
+        while findtype '7127' backpack
+            lifttype '7127' 60000
+            drop 'packy'
+            wait 500    
+        endwhile
+
+    endfor
+    
+    // Pet loyalty refresh
+    say 'all follow me'
+    
+endwhile

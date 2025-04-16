@@ -1,0 +1,102 @@
+// If no sewing kits found, then stop script.
+if not findtype "sewing kit" backpack
+    overhead "No sewing kits found!" 34
+    wait 5000
+    stop
+endif
+clearsysmsg 
+
+if skill 'Tailoring' < 100
+
+    // Set restock # to your restock for cloth.
+    // Target self if restocking from bank.
+    if not findtype '4225' backpack
+        if count 'Cloth' < 100
+            restock 3
+            wft
+            target 'self'
+            wait 1200
+        endif
+    endif
+
+    if skill 'Tailoring' < 54
+        dclicktype 'sewing kit' backpack
+        waitforgump 2653346093
+        gumpresponse 8
+        waitforgump 2653346093
+        gumpresponse 44
+        waitforgump 2653346093
+
+        while findtype 'fancy dress' true
+            dclicktype 'scissors' backpack
+            wft 500
+            targettype 'fancy dress' backpack 0
+            break
+        endwhile    
+        wait 600
+
+    elseif skill 'Tailoring' < 74.6
+        dclicktype 'sewing kit' backpack
+        waitforgump 2653346093
+        gumpresponse 8
+        waitforgump 2653346093
+        gumpresponse 58
+        waitforgump 2653346093
+
+        while findtype 'robe' true
+            dclicktype 'scissors' backpack
+            wft 500
+            targettype 'robe' backpack 0
+            break
+        endwhile    
+        wait 600
+
+    elseif skill 'Tailoring' < 99.4
+        dclicktype 'sewing kit' backpack
+        waitforgump 2653346093
+        gumpresponse 22
+        waitforgump 2653346093
+        gumpresponse 23
+        waitforgump 2653346093
+
+        while findtype 'folded cloth' true
+            dclicktype 'scissors' backpack
+            wft 500
+            targettype 'folded cloth' backpack 2001
+        endwhile    
+        wait 600
+
+    elseif skill 'Tailoring' < 100
+    
+    // Set restock # to your restock for leather.
+        // Target self if restocking from bank.
+        if count 'Leather' < 6
+            restock 4
+            wft
+            target 'self'
+            wait 1200
+        endif    
+    
+        dclicktype 'sewing kit' backpack
+        waitforgump 2653346093
+        gumpresponse 43
+        waitforgump 2653346093
+        gumpresponse 2
+        waitforgump 2653346093
+
+        while findtype 'studded gorget' true
+            dclicktype 'scissors' backpack
+            wft 500
+            targettype 'studded gorget' backpack 0
+            break
+        endwhile    
+        wait 600
+    endif
+    
+    loop
+
+else      
+    overhead 'Congrats...' 63
+    overhead 'YOU NOW HAVE GM TAILORING!' 63
+    stop
+endif

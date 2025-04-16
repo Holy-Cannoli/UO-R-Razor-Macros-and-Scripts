@@ -1,0 +1,93 @@
+# Training Magery 50 to 100
+# Set Restock Agent for regs to include
+# Mandrake Root, Ash, Pearl, Nightshade, Silk 
+
+if not varexist 'restock_container'
+    overhead "Target your restock container" 63
+    setvar 'restock_container'
+endif
+
+if skill 'Magery' < 100
+
+    if skill 'Magery' < 62
+        
+        if count 'Mandrake Root' < 10 or count 'Sulfurous Ash' < 10
+            restock 1
+            wft
+            target 'restock_container'
+            wait 1200
+        endif
+        
+        if mana > 11
+            overhead 'Casting Lightning' 88
+            cast 'lightning'
+            wft
+            target 'self'
+            wait 600
+        endif
+
+        if mana < 11
+            while mana < maxmana
+                skill 'meditation'
+                wait 1000
+            endwhile
+        endif
+        
+    elseif skill 'Magery' < 80
+        
+        if count 'Black Pearl' < 10 or count 'Nightshade' < 10
+            restock 1
+            wft
+            target 'restock_container'
+            wait 1200
+        endif
+        
+        if mana > 20
+            overhead "Casting Ebolt" 88
+            cast 'energy bolt'
+            wft
+            target 'self'
+            wait 600
+        endif 
+        
+        if mana < 20
+            while mana < maxmana
+                skill 'meditation'
+                wait 1000
+            endwhile
+        endif
+
+    elseif skill 'Magery' < 100
+        
+        if count 'Sulfurous Ash' < 10 or count "Spider's Silk" < 10
+            restock 1
+            wft
+            target 'restock_container'
+            wait 1200
+        endif
+        
+        if mana > 40
+            overhead 'Casting Flamestrike' 88
+            cast 'flamestrike'
+            wft
+            target 'self'
+            wait 600
+        endif 
+        
+        if mana < 40
+            while mana < maxmana
+                skill 'meditation'
+                wait 1000
+            endwhile
+        endif
+    
+    endif
+    
+    wait 1000
+    loop
+    
+else      
+    overhead 'Congrats...' 63
+    overhead 'YOU NOW HAVE GM MAGERY!' 63
+    stop
+endif

@@ -1,0 +1,15 @@
+# Clear prior Provo Targets.
+unsetvar! tamedTarget
+
+if not varexist 'tamedTarget'
+    overhead 'Target Tamed Animal' 55
+    setvar! tamedTarget
+endif
+
+while not dead
+    skill 'animallore'
+    wft
+    target tamedTarget
+    wait 1000
+endwhile
+    

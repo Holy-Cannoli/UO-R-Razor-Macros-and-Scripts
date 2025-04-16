@@ -1,0 +1,32 @@
+// Check if Daemon is already active
+if findtype '0x0009' false 2178
+    
+    // Print overhead message if Daemon is active
+    overhead 'Daemon is already active!' 35
+    stop
+
+endif
+
+
+while not dead
+    if not findtype '0x0009'
+    
+        // Reset timer if active
+        cooldown 'Daemon Active' 0 33 'EvilOmen' 0 false 'BlueViolet' 'DarkRed'
+        wait 200
+        cast 'Summon Daemon'
+        cooldown 'Summoning...' 8 33 'EvilOmen' 0 false 'BlueViolet' 'DarkRed'
+        wait 8500  // Wait 12.5 seconds for casting/recovery
+    else
+        if findtype '0x0009' as 'daemonPet'
+            setlasttarget 'daemonPet'
+            
+            // Change pet name here (Tartufo) is default
+            rename 'lasttarget' 'Tartufo'
+  
+            // This will be your 10 min cooldown for summon
+            cooldown 'Daemon Active' 600 33 'EvilOmen' 0 false 'BlueViolet' 'DarkRed'
+            stop
+        endif
+    endif
+endwhile

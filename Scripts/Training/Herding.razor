@@ -1,0 +1,16 @@
+@setvar! herdingTarget
+
+while not dead
+
+    if int = 100
+        stop
+    endif
+
+    dclick 'hands'
+    wft
+    target herdingTarget
+    wft
+    targetrelloc 1 1
+    wait 500
+
+endwhile

@@ -1,0 +1,126 @@
+clearsysmsg
+
+@setvar! sortOreOnStart 0
+@setvar! setOreWeight 355
+@setvar! combineOre 0
+
+if not varexist 'packy'
+    overhead 'Select your Pack Llama or Horse' 38
+    setvar! 'packy'
+endif
+
+if sortOreOnStart = 1
+    while findtype 'iron ore' backpack as ore
+        lift ore 60000
+        drop 'packy'
+        wait 500   
+    endwhile
+endif 
+    
+while not dead
+
+    if rhandempty
+        lifttype '3718' 
+        drop 'self' LeftHand
+        wait 500
+    endif
+        
+    if weight > setOreWeight
+        
+        if combineOre = 1
+            // Check default regular hue ore
+            if findtype '6583' backpack 0 as sOre
+                if findtype '6584' backpack 0 as mOre
+                    overhead 'Combining medium ore' 36
+                    dclick mOre
+                    wft
+                    target sOre
+                    wait 500
+                endif
+                if findtype '6585' backpack 0 as lgOre
+                    overhead 'Combining large ore' 36
+                    dclick lgOre
+                    wft
+                    target sOre 
+                    wait 500
+                endif
+                if findtype '6586' backpack 0 as xlOre
+                    overhead 'Combining extra large ore' 36
+                    dclick xlOre
+                    wft
+                    target sOre
+                    wait 500
+                endif
+            endif
+            
+            // Check shadow hue ore
+            if findtype '6583' backpack 2406 as sOre
+                if findtype '6584' backpack 2406 as mOre
+                    overhead 'Combining medium ore' 2406
+                    dclick mOre
+                    wft
+                    target sOre
+                    wait 500
+                endif
+                if findtype '6585' backpack 2406 as lgOre
+                    overhead 'Combining large ore' 2406
+                    dclick lgOre
+                    wft
+                    target sOre 
+                    wait 500
+                endif
+                if findtype '6586' backpack 2406 as xlOre
+                    overhead 'Combining extra large ore' 2406
+                    dclick xlOre
+                    wft
+                    target sOre
+                    wait 500
+                endif    
+            endif
+
+            // Check copper hue ore
+            if findtype '6583' backpack 2413 as sOre
+                if findtype '6584' backpack 2413 as mOre
+                    overhead 'Combining medium ore' 2413
+                    dclick mOre
+                    wft
+                    target sOre
+                    wait 500
+                endif
+                if findtype '6585' backpack 2413 as lgOre
+                    overhead 'Combining large ore' 2413
+                    dclick lgOre
+                    wft
+                    target sOre 
+                    wait 500
+                endif
+                if findtype '6586' backpack 2413 as xlOre
+                    overhead 'Combining extra large ore' 2413
+                    dclick xlOre
+                    wft
+                    target sOre
+                    wait 500
+                endif    
+            endif
+        endif        
+        
+        wait 500
+        
+        while findtype 'iron ore' backpack as ore
+            lift ore 60000
+            drop 'packy'
+            wait 500   
+        endwhile
+    endif
+    
+    hotkey 'use item in hand'
+    waitfortarget 550
+    
+    if insysmsg 'where do you wish to dig' or insysmsg 'you loosen' or insysmsg 'no metal here'
+        targetrelloc -1 0
+        wait 550
+    elseif insysmsg 'no metal here'
+        targetrelloc -2 0
+        wait 550
+    endif
+endwhile

@@ -1,0 +1,14 @@
+# Clear prior Eval Target.
+unsetvar! evalTarget
+
+if not varexist 'evalTarget'
+    overhead 'Target Player' 55
+    setvar! evalTarget
+endif
+
+while not dead
+    skill 'evalint'
+    wft 1
+    target evalTarget
+    wait 1000
+endwhile

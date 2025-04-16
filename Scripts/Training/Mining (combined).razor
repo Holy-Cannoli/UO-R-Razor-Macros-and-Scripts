@@ -1,0 +1,40 @@
+@setvar! stockRegOreBag
+
+while not dead
+    
+    // Move ingots to bank
+    if count 'Iron Ingots' > 200
+        organizer 2
+        while queued
+            overhead 'Depositing Iron Ingots'
+            wait 500
+        endwhile
+    endif
+
+    // Find iron ore in backpack
+    if findtype 'iron ore' backpack as ore and count 'Lesser Ore' = 2
+    // Find the closest forge
+        if findtype 'forge' true as sForge
+            // Use the ore
+            dclick 'ore'
+            waitfortarget 500
+            // Target the forge
+            target sForge
+            wait 500
+            // Check for failure messages
+            if insysmsg 'fail to smelt' or insysmsg 'no ore to smelt'
+                wait 500
+            endif
+        else
+            sysmsg 'No forge nearby!'
+            wait 1000
+            stop
+        endif
+    else
+        restock 6
+        wft
+        target stockRegOreBag
+        wait 800
+    endif
+
+endwhile

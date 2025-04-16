@@ -1,0 +1,94 @@
+// Initiatize variables
+@setvar! grabBoards 0x4141802D
+@setvar! grabCloth 0x4141802D
+@setvar! trashBarrel 0x4159E603
+
+// If no carpentry tools found, then stop script.
+if not findtype "4327" backpack
+    overhead "No tools found!" 34
+    wait 800
+    stop
+endif
+clearsysmsg 
+
+if skill 'Carpentry' < 100
+
+    // Set restock # to your restock for boards.
+    // Target self if restocking from bank.
+    if count 'Boards' < 20
+        restock 5
+        wft
+        target grabBoards
+        wait 1200
+    endif
+
+    // Crafting Ballot Box Deeds
+    if skill 'Carpentry' < 68.5
+        dclicktype '4327' backpack
+        waitforgump 2653346093
+        gumpresponse 36
+        waitforgump 2653346093
+        gumpresponse 44
+        waitforgump 2653346093
+
+        // Check for ballot box and trash barrel it
+        while findtype '5360' true
+            lifttype '5360' 1
+            drop trashBarrel
+            wait 500 
+            break
+        endwhile    
+        wait 600
+    
+    // Crafting Fishing Poles
+    elseif skill 'Carpentry' < 79
+
+        if count 'Cloth' < 10
+            restock 4
+            wft
+            target grabCloth
+            wait 1200
+        endif 
+
+        dclicktype '4327' backpack
+        waitforgump 2653346093
+        gumpresponse 22
+        waitforgump 2653346093
+        gumpresponse 23
+        waitforgump 2653346093
+
+        // Check for fishing poles and trash barrel it
+        while findtype '3520' true
+            lifttype '3520' 1
+            drop trashBarrel
+            wait 500 
+            break
+        endwhile    
+        wait 600
+
+    // Crafting Gnarled Staves
+    elseif skill 'Carpentry' < 100
+        dclicktype '4327' backpack
+        waitforgump 2653346093
+        gumpresponse 22
+        waitforgump 2653346093
+        gumpresponse 16
+        waitforgump 2653346093
+
+        while findtype '5112' true
+            lifttype '5112' 1
+            drop trashBarrel
+            wait 500 
+            break
+        endwhile    
+        wait 600
+
+    endif
+    
+    loop
+
+else      
+    overhead 'Congrats...' 63
+    overhead 'YOU NOW HAVE GM CARPENTRY!' 63
+    stop
+endif

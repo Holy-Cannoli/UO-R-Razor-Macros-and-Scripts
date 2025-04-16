@@ -1,0 +1,42 @@
+while not dead
+    // Find ore in backpack
+    if findtype '6583' backpack as ore
+        restock 6
+        wft
+        target 'self'
+        wait 500
+        if findtype 'forge' true as sForge
+            // Use the ore
+            dclick 'ore'
+            waitfortarget 500
+            // Target the forge
+            target sForge
+            wait 500
+        endif
+    
+    elseif findtype '6584' backpack as ore or findtype '6585' backpack as ore or findtype '6586' backpack as ore
+    
+        // Find the closest forge
+        if findtype 'forge' true as sForge
+            // Use the ore
+            dclick 'ore'
+            waitfortarget 500
+            // Target the forge
+            target sForge
+            wait 500
+            // Check for failure messages
+            if insysmsg 'fail to smelt' or insysmsg 'no ore to smelt'
+                wait 500
+            endif
+        else
+            sysmsg 'No forge nearby!'
+            wait 1000
+            stop
+        endif
+    else
+        restock 5
+        wft
+        target 'self'
+        wait 500
+    endif
+endwhile

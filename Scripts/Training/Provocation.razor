@@ -1,0 +1,90 @@
+# Clear prior Provo Targets.
+unsetvar! Provo-1
+unsetvar! Provo-2
+
+if not varexist 'Provo-1' or not varexist 'Provo-2'
+    overhead 'Target Monster #1' 55
+    setvar! Provo-1
+    overhead 'Target Monster #2' 55
+    setvar! Provo-2
+endif
+
+# Searching for instrument.
+if findtype '3763' backpack as BasicLute
+    @setvar! CurrentInstrument BasicLute
+    overhead 'We found a Lute to begin' 192
+elseif findtype '3740' backpack as BasicDrum
+    @setvar! CurrentInstrument BasicDrum
+    overhead 'We found a Drum to begin' 192
+elseif findtype '3741' backpack as BasicTamborine
+    @setvar! CurrentInstrument BasicTamborine
+    overhead 'We found a Tamborine to begin' 192
+elseif findtype '3762' backpack as BasicHarp
+    @setvar! CurrentInstrument BasicHarp
+    overhead 'We found a Harp to begin' 192
+elseif findtype '10245' backpack as BasicFlute
+    @setvar! CurrentInstrument BasicFlute
+    overhead 'We found a Flute to begin' 192
+endif
+
+while not dead
+
+    # Can set these to 0 and it will not train the skill
+    # Set skill target which will stop script once achieved
+    @setvar! trainProvocation 100
+
+    if insysmsg "What instrument shall you play?"
+        if findtype '3763' backpack as BasicLute
+            @setvar! CurrentInstrument BasicLute
+        elseif findtype '3740' backpack as BasicDrum
+            @setvar! CurrentInstrument BasicDrum
+        elseif findtype '3741' backpack as BasicTamborine
+            @setvar! CurrentInstrument BasicTamborine
+        elseif findtype '3762' backpack as BasicHarp
+            @setvar! CurrentInstrument BasicHarp
+        elseif findtype '10245' backpack as BasicFlute
+            @setvar! CurrentInstrument BasicFlute
+        else
+            overhead 'Out of instruments' 33
+            overhead 'Stopping script' 33
+            sysmsg 'Out of instruments'
+            sysmsg 'Stopping script'
+            stop
+        endif
+        wft 500
+        dclick CurrentInstrument
+        clearsysmsg
+    endif 
+
+    # Music skill check
+    if skill 'provo' < trainProvocation
+        skill 'provo'
+    else
+        # Stop script once skill target is achieved
+        overhead "You hit your target skill" 88
+        overhead "Move to new area" 34
+        stop
+endif
+  
+    waitfortarget
+    target 'Provo-1'
+    waitfortarget
+    target 'Provo-2'
+    wait 800
+
+if insysmsg 'your music succeeds'
+    cooldown 'Provocation' 10
+    for 10
+        dclicktype '3741' backpack
+        wait 500
+    endfor
+else
+    cooldown 'Provocation' 5
+endif
+
+for 6
+    dclicktype '3741' backpack
+    wait 600
+endfor
+endwhile
+loop
