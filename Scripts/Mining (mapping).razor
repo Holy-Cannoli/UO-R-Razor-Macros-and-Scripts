@@ -10,8 +10,27 @@ clearsysmsg
 @setvar! debugMessages 0
 // Define global wait time
 @setvar! globalWait 500
+// Define global wait time for next dig to happen
+@setvar! globalWaitNextDig 1000
 // Store the last successful locIndex (-1 means no node found yet)
 @setvar! lastSuccessfulLocIndex -1
+// Initialize variables for node search
+@setvar! locIndex 0
+// This will let us know how many mining cycles were attempted.
+// Do not edit this variable
+@setvar! fullCycleAttempted 0
+// Limit to 1 full cycles
+@setvar! maxFullCycles 1
+
+// ----LEAVE THESE NEXT TWO VARIABLES ALONE----
+// nodeFound tracks whether a mining node has been found
+// 0 = no node found yet, 1 = a node has been found and is being mined
+// We set it to 0 to start in the (searching for a node) mode
+@setvar! nodeFound 0
+// oreType stores the type of ore being mined (e.g., 1 for Dull Copper, 9 for Iron)
+// This helps display the correct ore name and color during mining
+// We set it to 0 to indicate no ore has been found yet (0 is a neutral value)
+@setvar! oreType 0
 
 if not varexist 'packy'
     overhead 'Select your Pack Llama or Horse' 38
@@ -22,16 +41,16 @@ if sortOreOnStart = 1
     while findtype 'iron ore' backpack as ore
         lift ore 60000
         drop 'packy'
-        wait 500   
+        wait globalWait   
     endwhile
 endif 
-    
+
 if not dead
     if rhandempty
         overhead 'Right hand empty, equipping pickaxe' 51
         lifttype '3718'
         drop 'self' RightHand
-        wait 500
+        wait globalWait
         if rhandempty
             overhead 'Failed to equip pickaxe!' 33
             stop
@@ -40,697 +59,823 @@ if not dead
         endif
     endif
         
-    if weight > setOreWeight
-        if combineOre = 1
-            // Check default regular hue ore
-            if findtype '6583' backpack 0 as sOre
-                if findtype '6584' backpack 0 as mOre
-                    overhead 'Combining medium ore' 36
-                    dclick mOre
-                    wft
-                    target sOre
-                    wait globalWait
+    // Main loop: continue searching and mining until max cycles are reached
+    while fullCycleAttempted < maxFullCycles
+        // Reset nodeFound at the start of each search cycle if no node is currently active
+        if nodeFound = 0
+            clearsysmsg
+            // First, try mining at the last successful location if it exists
+            if lastSuccessfulLocIndex >= 0
+                if debugMessages = 1
+                    overhead 'Trying last successful location (locIndex: {{lastSuccessfulLocIndex}})' 55
                 endif
-                if findtype '6585' backpack 0 as lgOre
-                    overhead 'Combining large ore' 36
-                    dclick lgOre
-                    wft
-                    target sOre 
-                    wait globalWait
-                endif
-                if findtype '6586' backpack 0 as xlOre
-                    overhead 'Combining extra large ore' 36
-                    dclick xlOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif
-            endif
-
-            // Check dull copper hue ore
-            if findtype '6583' backpack 2419 as sOre
-                if findtype '6584' backpack 2419 as mOre
-                    overhead 'Combining medium ore' 2419
-                    dclick mOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif
-                if findtype '6585' backpack 2419 as lgOre
-                    overhead 'Combining large ore' 2419
-                    dclick lgOre
-                    wft
-                    target sOre 
-                    wait globalWait
-                endif
-                if findtype '6586' backpack 2419 as xlOre
-                    overhead 'Combining extra large ore' 2419
-                    dclick xlOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif    
-            endif
-
-            // Check shadow hue ore
-            if findtype '6583' backpack 2406 as sOre
-                if findtype '6584' backpack 2406 as mOre
-                    overhead 'Combining medium ore' 2406
-                    dclick mOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif
-                if findtype '6585' backpack 2406 as lgOre
-                    overhead 'Combining large ore' 2406
-                    dclick lgOre
-                    wft
-                    target sOre 
-                    wait globalWait
-                endif
-                if findtype '6586' backpack 2406 as xlOre
-                    overhead 'Combining extra large ore' 2406
-                    dclick xlOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif    
-            endif
-            
-            // Check copper hue ore
-            if findtype '6583' backpack 2413 as sOre
-                if findtype '6584' backpack 2413 as mOre
-                    overhead 'Combining medium ore' 2413
-                    dclick mOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif
-                if findtype '6585' backpack 2413 as lgOre
-                    overhead 'Combining large ore' 2413
-                    dclick lgOre
-                    wft
-                    target sOre 
-                    wait globalWait
-                endif
-                if findtype '6586' backpack 2413 as xlOre
-                    overhead 'Combining extra large ore' 2413
-                    dclick xlOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif    
-            endif
-
-            // Check bronze hue ore
-            if findtype '6583' backpack 2418 as sOre
-                if findtype '6584' backpack 2418 as mOre
-                    overhead 'Combining medium ore' 2418
-                    dclick mOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif
-                if findtype '6585' backpack 2418 as lgOre
-                    overhead 'Combining large ore' 2418
-                    dclick lgOre
-                    wft
-                    target sOre 
-                    wait globalWait
-                endif
-                if findtype '6586' backpack 2418 as xlOre
-                    overhead 'Combining extra large ore' 2418
-                    dclick xlOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif    
-            endif
-
-            // Check golden hue ore
-            if findtype '6583' backpack 2213 as sOre
-                if findtype '6584' backpack 2213 as mOre
-                    overhead 'Combining medium ore' 2213
-                    dclick mOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif
-                if findtype '6585' backpack 2213 as lgOre
-                    overhead 'Combining large ore' 2213
-                    dclick lgOre
-                    wft
-                    target sOre 
-                    wait globalWait
-                endif
-                if findtype '6586' backpack 2213 as xlOre
-                    overhead 'Combining extra large ore' 2213
-                    dclick xlOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif    
-            endif
-
-            // Check agapite hue ore
-            if findtype '6583' backpack 2425 as sOre
-                if findtype '6584' backpack 2425 as mOre
-                    overhead 'Combining medium ore' 2425
-                    dclick mOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif
-                if findtype '6585' backpack 2425 as lgOre
-                    overhead 'Combining large ore' 2425
-                    dclick lgOre
-                    wft
-                    target sOre 
-                    wait globalWait
-                endif                
-                if findtype '6586' backpack 2425 as xlOre
-                    overhead 'Combining extra large ore' 2425
-                    dclick xlOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif    
-            endif
-
-            // Check verite hue ore
-            if findtype '6583' backpack 2207 as sOre
-                if findtype '6584' backpack 2207 as mOre
-                    overhead 'Combining medium ore' 2207
-                    dclick mOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif
-                if findtype '6585' backpack 2207 as lgOre
-                    overhead 'Combining large ore' 2207
-                    dclick lgOre
-                    wft
-                    target sOre 
-                    wait globalWait
-                endif
-                if findtype '6586' backpack 2207 as xlOre
-                    overhead 'Combining extra large ore' 2207
-                    dclick xlOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif    
-            endif
-            
-            // Check valorite hue ore
-            if findtype '6583' backpack 2219 as sOre
-                if findtype '6584' backpack 2219 as mOre
-                    overhead 'Combining medium ore' 2219
-                    dclick mOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif
-                if findtype '6585' backpack 2219 as lgOre
-                    overhead 'Combining large ore' 2219
-                    dclick lgOre
-                    wft
-                    target sOre 
-                    wait globalWait
-                endif
-                if findtype '6586' backpack 2219 as xlOre
-                    overhead 'Combining extra large ore' 2219
-                    dclick xlOre
-                    wft
-                    target sOre
-                    wait globalWait
-                endif    
-            endif
-        endif                        
+                hotkey 'use item in hand'
+                wft
+                waitfortarget globalWaitNextDig
                 
-        wait 500
-        
-        while findtype 'iron ore' backpack as ore
-            lift ore 60000
-            drop 'packy'
-            wait 500   
-        endwhile
-    endif
-    
-    clearsysmsg
-    
-    // First, try mining at the last successful location if it exists
-    @setvar! nodeFound 0
-    @setvar! oreType 0
-    if lastSuccessfulLocIndex >= 0
-        if debugMessages = 1
-            overhead 'Trying last successful location (locIndex: {{lastSuccessfulLocIndex}})' 55
+                if lastSuccessfulLocIndex = 0
+                    targetrelloc -1 0
+                elseif lastSuccessfulLocIndex = 1
+                    targetrelloc 1 0
+                elseif lastSuccessfulLocIndex = 2
+                    targetrelloc 0 -1
+                elseif lastSuccessfulLocIndex = 3
+                    targetrelloc 0 1
+                elseif lastSuccessfulLocIndex = 4
+                    targetrelloc -2 0
+                elseif lastSuccessfulLocIndex = 5
+                    targetrelloc 2 0
+                elseif lastSuccessfulLocIndex = 6
+                    targetrelloc 0 -2
+                elseif lastSuccessfulLocIndex = 7
+                    targetrelloc 0 2
+                elseif lastSuccessfulLocIndex = 8
+                    targetrelloc -3 0
+                elseif lastSuccessfulLocIndex = 9
+                    targetrelloc 3 0
+                elseif lastSuccessfulLocIndex = 10
+                    targetrelloc 0 -3
+                elseif lastSuccessfulLocIndex = 11
+                    targetrelloc 0 3
+                endif
+                // Default wait time is 1500
+                wait globalWaitNextDig
+                
+                // Check for ore types directly
+                if insysmsg 'dig some dull copper ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 1
+                    if debugMessages = 1
+                        overhead 'Debug: Found Dull Copper' 2419
+                    endif
+                    overhead 'Dull Copper Ore' 2419
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some shadow iron ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 2
+                    if debugMessages = 1
+                        overhead 'Debug: Found Shadow Iron' 2406
+                    endif
+                    overhead 'Shadow Iron Ore' 2406
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some copper ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 3
+                    if debugMessages = 1
+                        overhead 'Debug: Found Copper' 2413
+                    endif
+                    overhead 'Copper Ore' 2413
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some bronze ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 4
+                    if debugMessages = 1
+                        overhead 'Debug: Found Bronze' 2418
+                    endif
+                    overhead 'Bronze Ore' 2418
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some golden ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 5
+                    if debugMessages = 1
+                        overhead 'Debug: Found Golden' 2213
+                    endif
+                    overhead 'Golden Ore' 2213
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some agapite ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 6
+                    if debugMessages = 1
+                        overhead 'Debug: Found Agapite' 2425
+                    endif
+                    overhead 'Agapite Ore' 2425
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some verite ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 7
+                    if debugMessages = 1
+                        overhead 'Debug: Found Verite' 2207
+                    endif
+                    overhead 'Verite Ore' 2207
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some valorite ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 8
+                    if debugMessages = 1
+                        overhead 'Debug: Found Valorite' 2219
+                    endif
+                    overhead 'Valorite Ore' 2219
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some iron ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 9
+                    if debugMessages = 1
+                        overhead 'Debug: Found Iron Ore' 36
+                    endif
+                    overhead 'Iron Ore' 36
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'There is no metal here'
+                    overhead 'Last node depleted, searching for a new one' 33
+                    // Reset to search for a new node
+                    @setvar! lastSuccessfulLocIndex -1 
+                elseif insysmsg 'mine there'
+                    overhead 'Cant mine at last location, searching for a new one' 33
+                    // Reset to search for a new node
+                    @setvar! lastSuccessfulLocIndex -1
+                else
+                    if debugMessages = 1
+                        overhead 'Debug: Unexpected message at last location, searching new node' 33
+                    endif
+                    // Reset to search for a new node
+                    @setvar! lastSuccessfulLocIndex -1
+                endif
+            endif
+            
+            // If no node was found at the last successful location, cycle through targetrelloc coordinates
+            while nodeFound = 0 and fullCycleAttempted < maxFullCycles
+                if debugMessages = 1
+                    overhead 'Debug: Starting cycle, locIndex: {{locIndex}}, fullCycleAttempted: {{fullCycleAttempted}}' 55
+                endif
+                hotkey 'use item in hand'
+                wft
+                waitfortarget globalWaitNextDig
+                
+                // Try the current locIndex coordinate
+                if locIndex = 0
+                    targetrelloc -1 0
+                    if debugMessages = 1
+                        overhead 'Trying -1 0 (locIndex: {{locIndex}})' 55
+                    endif
+                elseif locIndex = 1
+                    targetrelloc 1 0
+                    if debugMessages = 1
+                        overhead 'Trying 1 0 (locIndex: {{locIndex}})' 55
+                    endif
+                elseif locIndex = 2
+                    targetrelloc 0 -1
+                    if debugMessages = 1
+                        overhead 'Trying 0 -1 (locIndex: {{locIndex}})' 55
+                    endif
+                elseif locIndex = 3
+                    targetrelloc 0 1
+                    if debugMessages = 1
+                        overhead 'Trying 0 1 (locIndex: {{locIndex}})' 55
+                    endif
+                elseif locIndex = 4
+                    targetrelloc -2 0
+                    if debugMessages = 1
+                        overhead 'Trying -2 0 (locIndex: {{locIndex}})' 55
+                    endif
+                elseif locIndex = 5
+                    targetrelloc 2 0
+                    if debugMessages = 1
+                        overhead 'Trying 2 0 (locIndex: {{locIndex}})' 55
+                    endif
+                elseif locIndex = 6
+                    targetrelloc 0 -2
+                    if debugMessages = 1
+                        overhead 'Trying 0 -2 (locIndex: {{locIndex}})' 55
+                    endif
+                elseif locIndex = 7
+                    targetrelloc 0 2
+                    if debugMessages = 1
+                        overhead 'Trying 0 2 (locIndex: {{locIndex}})' 55
+                    endif
+                elseif locIndex = 8
+                    targetrelloc -3 0
+                    if debugMessages = 1
+                        overhead 'Trying -3 0 (locIndex: {{locIndex}})' 55
+                    endif
+                elseif locIndex = 9
+                    targetrelloc 3 0
+                    if debugMessages = 1
+                        overhead 'Trying 3 0 (locIndex: {{locIndex}})' 55
+                    endif
+                elseif locIndex = 10
+                    targetrelloc 0 -3
+                    if debugMessages = 1
+                        overhead 'Trying 0 -3 (locIndex: {{locIndex}})' 55
+                    endif
+                elseif locIndex = 11
+                    targetrelloc 0 3
+                    if debugMessages = 1
+                        overhead 'Trying 0 3 (locIndex: {{locIndex}})' 55
+                    endif
+                endif
+                // Default wait time is 1500
+                wait globalWaitNextDig
+                
+                // Check for ore types directly
+                if insysmsg 'dig some dull copper ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 1
+                    @setvar! lastSuccessfulLocIndex locIndex
+                    if debugMessages = 1
+                        overhead 'Debug: Found Dull Copper' 2419
+                    endif
+                    overhead 'Dull Copper Ore' 2419
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some shadow iron ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 2
+                    @setvar! lastSuccessfulLocIndex locIndex
+                    if debugMessages = 1
+                        overhead 'Debug: Found Shadow Iron' 2406
+                    endif
+                    overhead 'Shadow Iron Ore' 2406
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some copper ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 3
+                    @setvar! lastSuccessfulLocIndex locIndex
+                    if debugMessages = 1
+                        overhead 'Debug: Found Copper' 2413
+                    endif
+                    overhead 'Copper Ore' 2413
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some bronze ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 4
+                    @setvar! lastSuccessfulLocIndex locIndex
+                    if debugMessages = 1
+                        overhead 'Debug: Found Bronze' 2418
+                    endif
+                    overhead 'Bronze Ore' 2418
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some golden ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 5
+                    @setvar! lastSuccessfulLocIndex locIndex
+                    if debugMessages = 1
+                        overhead 'Debug: Found Golden' 2213
+                    endif
+                    overhead 'Golden Ore' 2213
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some agapite ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 6
+                    @setvar! lastSuccessfulLocIndex locIndex
+                    if debugMessages = 1
+                        overhead 'Debug: Found Agapite' 2425
+                    endif
+                    overhead 'Agapite Ore' 2425
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some verite ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 7
+                    @setvar! lastSuccessfulLocIndex locIndex
+                    if debugMessages = 1
+                        overhead 'Debug: Found Verite' 2207
+                    endif
+                    overhead 'Verite Ore' 2207
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some valorite ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 8
+                    @setvar! lastSuccessfulLocIndex locIndex
+                    if debugMessages = 1
+                        overhead 'Debug: Found Valorite' 2219
+                    endif
+                    overhead 'Valorite Ore' 2219
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'dig some iron ore'
+                    @setvar! nodeFound 1
+                    @setvar! oreType 9
+                    @setvar! lastSuccessfulLocIndex locIndex
+                    if debugMessages = 1
+                        overhead 'Debug: Found Iron Ore' 36
+                    endif
+                    overhead 'Iron Ore' 36
+                    wait 250
+                    say '[where'
+                elseif insysmsg 'There is no metal here'
+                    if debugMessages = 1
+                        overhead 'Debug: No metal at locIndex: {{locIndex}}' 33
+                    endif
+                elseif insysmsg 'mine there'
+                    if debugMessages = 1
+                        overhead 'Debug: Cant mine at locIndex: {{locIndex}}' 33
+                    endif
+                else
+                    if debugMessages = 1
+                        overhead 'Debug: Unexpected message at locIndex: {{locIndex}}' 33
+                    endif
+                endif
+                
+                // Manually increment locIndex after each attempt
+                if locIndex = 0
+                    @setvar! locIndex 1
+                elseif locIndex = 1
+                    @setvar! locIndex 2
+                elseif locIndex = 2
+                    @setvar! locIndex 3
+                elseif locIndex = 3
+                    @setvar! locIndex 4
+                elseif locIndex = 4
+                    @setvar! locIndex 5
+                elseif locIndex = 5
+                    @setvar! locIndex 6
+                elseif locIndex = 6
+                    @setvar! locIndex 7
+                elseif locIndex = 7
+                    @setvar! locIndex 8
+                elseif locIndex = 8
+                    @setvar! locIndex 9
+                elseif locIndex = 9
+                    @setvar! locIndex 10
+                elseif locIndex = 10
+                    @setvar! locIndex 11
+                elseif locIndex = 11
+                    @setvar! locIndex 0
+                    // Manually increment fullCycleAttempted
+                    if fullCycleAttempted = 0
+                        @setvar! fullCycleAttempted 1
+                    elseif fullCycleAttempted = 1
+                        @setvar! fullCycleAttempted 2
+                    endif
+                    if debugMessages = 1
+                        overhead 'Debug: Completed full cycle, fullCycleAttempted: {{fullCycleAttempted}}' 33
+                    endif
+                endif
+                if debugMessages = 1
+                    overhead 'Debug: End of cycle, locIndex: {{locIndex}}, nodeFound: {{nodeFound}}, fullCycleAttempted: {{fullCycleAttempted}}' 55
+                endif
+            endwhile
         endif
-        hotkey 'use item in hand'
-        wft
-        waitfortarget 600
         
-        if lastSuccessfulLocIndex = 0
-            targetrelloc -1 0
-        elseif lastSuccessfulLocIndex = 1
-            targetrelloc 1 0
-        elseif lastSuccessfulLocIndex = 2
-            targetrelloc 0 -1
-        elseif lastSuccessfulLocIndex = 3
-            targetrelloc 0 1
-        endif
-        wait 1000
-        
-        // Check for ore types directly
-        if insysmsg 'dig some dull copper ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 1
-            if debugMessages = 1
-                overhead 'Debug: Found Dull Copper' 2419
+        // Continuous mining loop with ore type display
+        while nodeFound = 1
+            // Clear system messages before each dig
+            clearsysmsg
+            
+            // Check if right hand is empty or if pickaxe broke
+            if rhandempty or insysmsg 'You have worn out your tool'
+                overhead 'Pickaxe missing or broken, equipping a new one' 51
+                lifttype '3718'
+                drop 'self' RightHand
+                wait globalWait
+                if rhandempty
+                    overhead 'No pickaxe found in backpack!' 33
+                    stop
+                else
+                    overhead 'New pickaxe equipped successfully' 55
+                endif
             endif
-            overhead 'Dull Copper Ore' 2419
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some shadow iron ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 2
-            if debugMessages = 1
-                overhead 'Debug: Found Shadow Iron' 2406
+            
+            hotkey 'use item in hand'
+            wft
+            waitfortarget globalWaitNextDig
+            
+            if lastSuccessfulLocIndex = 0
+                targetrelloc -1 0
+                if debugMessages = 1
+                    overhead 'Mining at -1 0 (locIndex: {{lastSuccessfulLocIndex}})' 55
+                endif
+            elseif lastSuccessfulLocIndex = 1
+                targetrelloc 1 0
+                if debugMessages = 1
+                    overhead 'Mining at 1 0 (locIndex: {{lastSuccessfulLocIndex}})' 55
+                endif
+            elseif lastSuccessfulLocIndex = 2
+                targetrelloc 0 -1
+                if debugMessages = 1
+                    overhead 'Mining at 0 -1 (locIndex: {{lastSuccessfulLocIndex}})' 55
+                endif
+            elseif lastSuccessfulLocIndex = 3
+                targetrelloc 0 1
+                if debugMessages = 1
+                    overhead 'Mining at 0 1 (locIndex: {{lastSuccessfulLocIndex}})' 55
+                endif
+            elseif lastSuccessfulLocIndex = 4
+                targetrelloc -2 0
+                if debugMessages = 1
+                    overhead 'Mining at -2 0 (locIndex: {{lastSuccessfulLocIndex}})' 55
+                endif
+            elseif lastSuccessfulLocIndex = 5
+                targetrelloc 2 0
+                if debugMessages = 1
+                    overhead 'Mining at 2 0 (locIndex: {{lastSuccessfulLocIndex}})' 55
+                endif
+            elseif lastSuccessfulLocIndex = 6
+                targetrelloc 0 -2
+                if debugMessages = 1
+                    overhead 'Mining at 0 -2 (locIndex: {{lastSuccessfulLocIndex}})' 55
+                endif
+            elseif lastSuccessfulLocIndex = 7
+                targetrelloc 0 2
+                if debugMessages = 1
+                    overhead 'Mining at 0 2 (locIndex: {{lastSuccessfulLocIndex}})' 55
+                endif
+            elseif lastSuccessfulLocIndex = 8
+                targetrelloc -3 0
+                if debugMessages = 1
+                    overhead 'Mining at -3 0 (locIndex: {{lastSuccessfulLocIndex}})' 55
+                endif
+            elseif lastSuccessfulLocIndex = 9
+                targetrelloc 3 0
+                if debugMessages = 1
+                    overhead 'Mining at 3 0 (locIndex: {{lastSuccessfulLocIndex}})' 55
+                endif
+            elseif lastSuccessfulLocIndex = 10
+                targetrelloc 0 -3
+                if debugMessages = 1
+                    overhead 'Mining at 0 -3 (locIndex: {{lastSuccessfulLocIndex}})' 55
+                endif
+            elseif lastSuccessfulLocIndex = 11
+                targetrelloc 0 3
+                if debugMessages = 1
+                    overhead 'Mining at 0 3 (locIndex: {{lastSuccessfulLocIndex}})' 55
+                endif
             endif
-            overhead 'Shadow Iron Ore' 2406
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some copper ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 3
-            if debugMessages = 1
-                overhead 'Debug: Found Copper' 2413
-            endif
-            overhead 'Copper Ore' 2413
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some bronze ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 4
-            if debugMessages = 1
-                overhead 'Debug: Found Bronze' 2418
-            endif
-            overhead 'Bronze Ore' 2418
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some golden ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 5
-            if debugMessages = 1
-                overhead 'Debug: Found Golden' 2213
-            endif
-            overhead 'Golden Ore' 2213
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some agapite ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 6
-            if debugMessages = 1
-                overhead 'Debug: Found Agapite' 2425
-            endif
-            overhead 'Agapite Ore' 2425
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some verite ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 7
-            if debugMessages = 1
-                overhead 'Debug: Found Verite' 2207
-            endif
-            overhead 'Verite Ore' 2207
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some valorite ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 8
-            if debugMessages = 1
-                overhead 'Debug: Found Valorite' 2219
-            endif
-            overhead 'Valorite Ore' 2219
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some iron ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 9
-            if debugMessages = 1
-                overhead 'Debug: Found Iron Ore' 36
-            endif
-            overhead 'Iron Ore' 36
-            wait 250
-            say '[where'
-        elseif insysmsg 'There is no metal here'
-            overhead 'Last node depleted, searching for a new one' 33
-            // Reset to search for a new node
-            @setvar! lastSuccessfulLocIndex -1 
-        elseif insysmsg "You can\'t mine there"
-            overhead 'Can\'t mine at last location, searching for a new one' 33
-            // Reset to search for a new node
-            @setvar! lastSuccessfulLocIndex -1
-        endif
-    endif
-    
-    // If no node was found at the last successful location, cycle through targetrelloc coordinates
-    @setvar! locIndex 0
-    while nodeFound = 0 and locIndex < 4
-        hotkey 'use item in hand'
-        wft
-        waitfortarget 600
-        
-        if locIndex = 0
-            targetrelloc -1 0
-            if debugMessages = 1
-                overhead 'Trying -1 0 (locIndex: {{locIndex}})' 55
-            endif
-        elseif locIndex = 1
-            targetrelloc 1 0
-            if debugMessages = 1
-                overhead 'Trying 1 0 (locIndex: {{locIndex}})' 55
-            endif
-        elseif locIndex = 2
-            targetrelloc 0 -1
-            if debugMessages = 1
-                overhead 'Trying 0 -1 (locIndex: {{locIndex}})' 55
-            endif
-        elseif locIndex = 3
-            targetrelloc 0 1
-            if debugMessages = 1
-                overhead 'Trying 0 1 (locIndex: {{locIndex}})' 55
-            endif
-        endif
-        wait 1000
-        
-        // Check for ore types directly
-        if insysmsg 'dig some dull copper ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 1
-            // Store the successful locIndex
-            @setvar! lastSuccessfulLocIndex locIndex
-            if debugMessages = 1
-                overhead 'Debug: Found Dull Copper' 2419
-            endif
-            overhead 'Dull Copper Ore' 2419
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some shadow iron ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 2
-            @setvar! lastSuccessfulLocIndex locIndex
-            if debugMessages = 1
-                overhead 'Debug: Found Shadow Iron' 2406
-            endif
-            overhead 'Shadow Iron Ore' 2406
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some copper ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 3
-            @setvar! lastSuccessfulLocIndex locIndex
-            if debugMessages = 1
-                overhead 'Debug: Found Copper (broad check)' 2413
-            endif
-            overhead 'Copper Ore' 2413
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some bronze ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 4
-            @setvar! lastSuccessfulLocIndex locIndex
-            if debugMessages = 1
-                overhead 'Debug: Found Bronze' 2418
-            endif
-            overhead 'Bronze Ore' 2418
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some golden ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 5
-            @setvar! lastSuccessfulLocIndex locIndex
-            if debugMessages = 1
-                overhead 'Debug: Found Golden' 2213
-            endif
-            overhead 'Golden Ore' 2213
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some agapite ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 6
-            @setvar! lastSuccessfulLocIndex locIndex
-            if debugMessages = 1
-                overhead 'Debug: Found Agapite' 2425
-            endif
-            overhead 'Agapite Ore' 2425
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some verite ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 7
-            @setvar! lastSuccessfulLocIndex locIndex
-            if debugMessages = 1
-                overhead 'Debug: Found Verite' 2207
-            endif
-            overhead 'Verite Ore' 2207
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some valorite ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 8
-            @setvar! lastSuccessfulLocIndex locIndex
-            if debugMessages = 1
-                overhead 'Debug: Found Valorite' 2219
-            endif
-            overhead 'Valorite Ore' 2219
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some iron ore'
-            @setvar! nodeFound 1
-            @setvar! oreType 9
-            @setvar! lastSuccessfulLocIndex locIndex
-            if debugMessages = 1
-                overhead 'Debug: Found Iron Ore' 36
-            endif
-            overhead 'Iron Ore' 36
-            wait 250
-            say '[where'
-        elseif insysmsg 'There is no metal here'
-            overhead 'No metal here, moving to next spot' 33
-            // Manually increment locIndex without arithmetic
-            if locIndex = 0
-                @setvar! locIndex 1
-            elseif locIndex = 1
-                @setvar! locIndex 2
-            elseif locIndex = 2
-                @setvar! locIndex 3
-            elseif locIndex = 3
-                @setvar! locIndex 4
-            endif
-        elseif insysmsg "You can\'t mine there"
-            overhead 'Can\'t mine here, moving to next spot' 33
-            // Manually increment locIndex without arithmetic
-            if locIndex = 0
-                @setvar! locIndex 1
-            elseif locIndex = 1
-                @setvar! locIndex 2
-            elseif locIndex = 2
-                @setvar! locIndex 3
-            elseif locIndex = 3
-                @setvar! locIndex 4
-            endif
-        else
-            // Manually increment locIndex without arithmetic
-            if locIndex = 0
-                @setvar! locIndex 1
-            elseif locIndex = 1
-                @setvar! locIndex 2
-            elseif locIndex = 2
-                @setvar! locIndex 3
-            elseif locIndex = 3
-                @setvar! locIndex 4
-            endif
-        endif
-    endwhile
-    
-    // Continuous mining loop with ore type display
-    while nodeFound = 1
-        clearsysmsg  // Clear system messages before each dig
-        
-        // Check if right hand is empty or if pickaxe broke
-        if rhandempty or insysmsg 'You have worn out your tool'
-            overhead 'Pickaxe missing or broken, equipping a new one' 51
-            lifttype '3718'
-            drop 'self' RightHand
-            wait 500
-            if rhandempty
-                overhead 'No pickaxe found in backpack!' 33
-                stop
-            else
-                overhead 'New pickaxe equipped successfully' 55
-            endif
-        endif
-        
-        hotkey 'use item in hand'
-        wft
-        waitfortarget 600
-        
-        if lastSuccessfulLocIndex = 0
-            targetrelloc -1 0
-            if debugMessages = 1
-                overhead 'Mining at -1 0 (locIndex: {{lastSuccessfulLocIndex}})' 55
-            endif
-        elseif lastSuccessfulLocIndex = 1
-            targetrelloc 1 0
-            if debugMessages = 1
-                overhead 'Mining at 1 0 (locIndex: {{lastSuccessfulLocIndex}})' 55
-            endif
-        elseif lastSuccessfulLocIndex = 2
-            targetrelloc 0 -1
-            if debugMessages = 1
-                overhead 'Mining at 0 -1 (locIndex: {{lastSuccessfulLocIndex}})' 55
-            endif
-        elseif lastSuccessfulLocIndex = 3
-            targetrelloc 0 1
-            if debugMessages = 1
-                overhead 'Mining at 0 1 (locIndex: {{lastSuccessfulLocIndex}})' 55
-            endif
-        endif
-        wait 1000
-        
-        // Check for ore types to confirm the node is still active
-        if insysmsg 'dig some dull copper ore'
-            @setvar! oreType 1
-            if debugMessages = 1
-                overhead 'Debug: Found Dull Copper' 2419
-            endif
-            overhead 'Dull Copper Ore' 2419
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some shadow iron ore'
-            @setvar! oreType 2
-            if debugMessages = 1
-                overhead 'Debug: Found Shadow Iron' 2406
-            endif
-            overhead 'Shadow Iron Ore' 2406
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some copper ore'
-            @setvar! oreType 3
-            if debugMessages = 1
-                overhead 'Debug: Found Copper (broad check)' 2413
-            endif
-            overhead 'Copper Ore' 2413
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some bronze ore'
-            @setvar! oreType 4
-            if debugMessages = 1
-                overhead 'Debug: Found Bronze' 2418
-            endif
-            overhead 'Bronze Ore' 2418
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some golden ore'
-            @setvar! oreType 5
-            if debugMessages = 1
-                overhead 'Debug: Found Golden' 2213
-            endif
-            overhead 'Golden Ore' 2213
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some agapite ore'
-            @setvar! oreType 6
-            if debugMessages = 1
-                overhead 'Debug: Found Agapite' 2425
-            endif
-            overhead 'Agapite Ore' 2425
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some verite ore'
-            @setvar! oreType 7
-            if debugMessages = 1
-                overhead 'Debug: Found Verite' 2207
-            endif
-            overhead 'Verite Ore' 2207
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some valorite ore'
-            @setvar! oreType 8
-            if debugMessages = 1
-                overhead 'Debug: Found Valorite' 2219
-            endif
-            overhead 'Valorite Ore' 2219
-            wait 250
-            say '[where'
-        elseif insysmsg 'dig some iron ore'
-            @setvar! oreType 9
-            if debugMessages = 1
-                overhead 'Debug: Found Iron Ore' 36
-            endif
-            overhead 'Iron Ore' 36
-            wait 250
-            say '[where'
-        elseif insysmsg 'There is no metal here'
-            overhead 'Node depleted, searching for a new one' 33
-            @setvar! nodeFound 0
-            // Reset to search for a new node
-            @setvar! lastSuccessfulLocIndex -1
-        elseif insysmsg "You can\'t mine there"
-            overhead 'Can\'t mine here, searching for a new one' 33
-            @setvar! nodeFound 0
-            // Reset to search for a new node
-            @setvar! lastSuccessfulLocIndex -1
-        elseif insysmsg 'fail to find any useable ore'
-            if debugMessages = 1
-                overhead 'Debug: Failed to find ore, continuing...' 33
-            endif
-        else
-            if debugMessages = 1
-                overhead 'Debug: No ore detected, using last oreType: {{oreType}}' 33
-            endif
-            // Fallback to last known oreType
-            if oreType = 1
+            // Default wait time is 1500
+            wait globalWaitNextDig
+            
+            // Check for ore types to confirm the node is still active
+            if insysmsg 'dig some dull copper ore'
+                @setvar! oreType 1
+                if debugMessages = 1
+                    overhead 'Debug: Found Dull Copper' 2419
+                endif
                 overhead 'Dull Copper Ore' 2419
                 wait 250
                 say '[where'
-            elseif oreType = 2
+            elseif insysmsg 'dig some shadow iron ore'
+                @setvar! oreType 2
+                if debugMessages = 1
+                    overhead 'Debug: Found Shadow Iron' 2406
+                endif
                 overhead 'Shadow Iron Ore' 2406
                 wait 250
                 say '[where'
-            elseif oreType = 3
+            elseif insysmsg 'dig some copper ore'
+                @setvar! oreType 3
+                if debugMessages = 1
+                    overhead 'Debug: Found Copper' 2413
+                endif
                 overhead 'Copper Ore' 2413
                 wait 250
                 say '[where'
-            elseif oreType = 4
+            elseif insysmsg 'dig some bronze ore'
+                @setvar! oreType 4
+                if debugMessages = 1
+                    overhead 'Debug: Found Bronze' 2418
+                endif
                 overhead 'Bronze Ore' 2418
                 wait 250
                 say '[where'
-            elseif oreType = 5
+            elseif insysmsg 'dig some golden ore'
+                @setvar! oreType 5
+                if debugMessages = 1
+                    overhead 'Debug: Found Golden' 2213
+                endif
                 overhead 'Golden Ore' 2213
                 wait 250
                 say '[where'
-            elseif oreType = 6
+            elseif insysmsg 'dig some agapite ore'
+                @setvar! oreType 6
+                if debugMessages = 1
+                    overhead 'Debug: Found Agapite' 2425
+                endif
                 overhead 'Agapite Ore' 2425
                 wait 250
                 say '[where'
-            elseif oreType = 7
+            elseif insysmsg 'dig some verite ore'
+                @setvar! oreType 7
+                if debugMessages = 1
+                    overhead 'Debug: Found Verite' 2207
+                endif
                 overhead 'Verite Ore' 2207
                 wait 250
                 say '[where'
-            elseif oreType = 8
+            elseif insysmsg 'dig some valorite ore'
+                @setvar! oreType 8
+                if debugMessages = 1
+                    overhead 'Debug: Found Valorite' 2219
+                endif
                 overhead 'Valorite Ore' 2219
                 wait 250
                 say '[where'
-            elseif oreType = 9
+            elseif insysmsg 'dig some iron ore'
+                @setvar! oreType 9
+                if debugMessages = 1
+                    overhead 'Debug: Found Iron Ore' 36
+                endif
                 overhead 'Iron Ore' 36
                 wait 250
                 say '[where'
+            elseif insysmsg 'There is no metal here'
+                overhead 'Node depleted, searching for a new one' 33
+                @setvar! nodeFound 0
+                @setvar! lastSuccessfulLocIndex -1
+            elseif insysmsg 'mine there'
+                overhead 'Cant mine here, searching for a new one' 33
+                @setvar! nodeFound 0
+                @setvar! lastSuccessfulLocIndex -1
+            elseif insysmsg 'fail to find any useable ore'
+                if debugMessages = 1
+                    overhead 'Debug: Failed to find ore, continuing...' 33
+                endif
+            else
+                if debugMessages = 1
+                    overhead 'Debug: Unexpected message, using last oreType: {{oreType}}' 33
+                endif
+                // Fallback to last known oreType
+                if oreType = 1
+                    overhead 'Dull Copper Ore' 2419
+                    wait 250
+                    say '[where'
+                elseif oreType = 2
+                    overhead 'Shadow Iron Ore' 2406
+                    wait 250
+                    say '[where'
+                elseif oreType = 3
+                    overhead 'Copper Ore' 2413
+                    wait 250
+                    say '[where'
+                elseif oreType = 4
+                    overhead 'Bronze Ore' 2418
+                    wait 250
+                    say '[where'
+                elseif oreType = 5
+                    overhead 'Golden Ore' 2213
+                    wait 250
+                    say '[where'
+                elseif oreType = 6
+                    overhead 'Agapite Ore' 2425
+                    wait 250
+                    say '[where'
+                elseif oreType = 7
+                    overhead 'Verite Ore' 2207
+                    wait 250
+                    say '[where'
+                elseif oreType = 8
+                    overhead 'Valorite Ore' 2219
+                    wait 250
+                    say '[where'
+                elseif oreType = 9
+                    overhead 'Iron Ore' 36
+                    wait 250
+                    say '[where'
+                endif
             endif
-        endif
+            
+            // Check weight after each dig to combine and transfer ore
+            if weight > setOreWeight
+                if combineOre = 1
+                    // Check default regular hue ore
+                    if findtype '6583' backpack 0 as sOre
+                        if findtype '6584' backpack 0 as mOre
+                            overhead 'Combining medium ore' 36
+                            dclick mOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif
+                        if findtype '6585' backpack 0 as lgOre
+                            overhead 'Combining large ore' 36
+                            dclick lgOre
+                            wft
+                            target sOre 
+                            wait globalWait
+                        endif
+                        if findtype '6586' backpack 0 as xlOre
+                            overhead 'Combining extra large ore' 36
+                            dclick xlOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif
+                    endif
+
+                    // Check dull copper hue ore
+                    if findtype '6583' backpack 2419 as sOre
+                        if findtype '6584' backpack 2419 as mOre
+                            overhead 'Combining medium ore' 2419
+                            dclick mOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif
+                        if findtype '6585' backpack 2419 as lgOre
+                            overhead 'Combining large ore' 2419
+                            dclick lgOre
+                            wft
+                            target sOre 
+                            wait globalWait
+                        endif
+                        if findtype '6586' backpack 2419 as xlOre
+                            overhead 'Combining extra large ore' 2419
+                            dclick xlOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif    
+                    endif
+
+                    // Check shadow hue ore
+                    if findtype '6583' backpack 2406 as sOre
+                        if findtype '6584' backpack 2406 as mOre
+                            overhead 'Combining medium ore' 2406
+                            dclick mOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif
+                        if findtype '6585' backpack 2406 as lgOre
+                            overhead 'Combining large ore' 2406
+                            dclick lgOre
+                            wft
+                            target sOre 
+                            wait globalWait
+                        endif
+                        if findtype '6586' backpack 2406 as xlOre
+                            overhead 'Combining extra large ore' 2406
+                            dclick xlOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif    
+                    endif
+                    
+                    // Check copper hue ore
+                    if findtype '6583' backpack 2413 as sOre
+                        if findtype '6584' backpack 2413 as mOre
+                            overhead 'Combining medium ore' 2413
+                            dclick mOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif
+                        if findtype '6585' backpack 2413 as lgOre
+                            overhead 'Combining large ore' 2413
+                            dclick lgOre
+                            wft
+                            target sOre 
+                            wait globalWait
+                        endif
+                        if findtype '6586' backpack 2413 as xlOre
+                            overhead 'Combining extra large ore' 2413
+                            dclick xlOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif    
+                    endif
+
+                    // Check bronze hue ore
+                    if findtype '6583' backpack 2418 as sOre
+                        if findtype '6584' backpack 2418 as mOre
+                            overhead 'Combining medium ore' 2418
+                            dclick mOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif
+                        if findtype '6585' backpack 2418 as lgOre
+                            overhead 'Combining large ore' 2418
+                            dclick lgOre
+                            wft
+                            target sOre 
+                            wait globalWait
+                        endif
+                        if findtype '6586' backpack 2418 as xlOre
+                            overhead 'Combining extra large ore' 2418
+                            dclick xlOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif    
+                    endif
+
+                    // Check golden hue ore
+                    if findtype '6583' backpack 2213 as sOre
+                        if findtype '6584' backpack 2213 as mOre
+                            overhead 'Combining medium ore' 2213
+                            dclick mOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif
+                        if findtype '6585' backpack 2213 as lgOre
+                            overhead 'Combining large ore' 2213
+                            dclick lgOre
+                            wft
+                            target sOre 
+                            wait globalWait
+                        endif
+                        if findtype '6586' backpack 2213 as xlOre
+                            overhead 'Combining extra large ore' 2213
+                            dclick xlOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif    
+                    endif
+
+                    // Check agapite hue ore
+                    if findtype '6583' backpack 2425 as sOre
+                        if findtype '6584' backpack 2425 as mOre
+                            overhead 'Combining medium ore' 2425
+                            dclick mOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif
+                        if findtype '6585' backpack 2425 as lgOre
+                            overhead 'Combining large ore' 2425
+                            dclick lgOre
+                            wft
+                            target sOre 
+                            wait globalWait
+                        endif                
+                        if findtype '6586' backpack 2425 as xlOre
+                            overhead 'Combining extra large ore' 2425
+                            dclick xlOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif    
+                    endif
+
+                    // Check verite hue ore
+                    if findtype '6583' backpack 2207 as sOre
+                        if findtype '6584' backpack 2207 as mOre
+                            overhead 'Combining medium ore' 2207
+                            dclick mOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif
+                        if findtype '6585' backpack 2207 as lgOre
+                            overhead 'Combining large ore' 2207
+                            dclick lgOre
+                            wft
+                            target sOre 
+                            wait globalWait
+                        endif
+                        if findtype '6586' backpack 2207 as xlOre
+                            overhead 'Combining extra large ore' 2207
+                            dclick xlOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif    
+                    endif
+                    
+                    // Check valorite hue ore
+                    if findtype '6583' backpack 2219 as sOre
+                        if findtype '6584' backpack 2219 as mOre
+                            overhead 'Combining medium ore' 2219
+                            dclick mOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif
+                        if findtype '6585' backpack 2219 as lgOre
+                            overhead 'Combining large ore' 2219
+                            dclick lgOre
+                            wft
+                            target sOre 
+                            wait globalWait
+                        endif
+                        if findtype '6586' backpack 2219 as xlOre
+                            overhead 'Combining extra large ore' 2219
+                            dclick xlOre
+                            wft
+                            target sOre
+                            wait globalWait
+                        endif    
+                    endif
+                endif                        
+                        
+                wait globalWait
+                
+                while findtype 'iron ore' backpack as ore
+                    lift ore 60000
+                    drop 'packy'
+                    wait globalWait   
+                endwhile
+            endif
+        endwhile
         
-        // Check weight again after each dig to combine and transfer ore
+        // Check weight after mining loop (if node is depleted)
         if weight > setOreWeight
             if combineOre = 1
                 // Check default regular hue ore
@@ -959,18 +1104,21 @@ if not dead
                 endif
             endif                        
                     
-            wait 500
+            wait globalWait
             
             while findtype 'iron ore' backpack as ore
                 lift ore 60000
                 drop 'packy'
-                wait 500   
+                wait globalWait   
             endwhile
         endif
     endwhile
     
-    // No need for additional ore type display here since it is handled in the mining loop
+    // If we exit the main loop, no ore was found after all cycles
     if nodeFound = 0
+        if debugMessages = 1
+            overhead 'Debug: Exiting, no ore found after {{fullCycleAttempted}} full cycles' 33
+        endif
         overhead 'No ore found!' 33
     endif
 endif
